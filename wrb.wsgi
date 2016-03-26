@@ -9,6 +9,7 @@ def application(environ, start_response):
 	POST = 	environ['wsgi.input'].read(REQUEST_SIZE)
 	JSON = json.loads(POST)
 
+
 	SENDER = JSON['name']
 	TEXT = JSON['text']
 
