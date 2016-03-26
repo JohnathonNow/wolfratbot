@@ -10,9 +10,9 @@ def application(environ, start_response):
 	TEXT = JSON['text']
 
 	if '!repeat' in TEXT:
-		send(TEXT.replace('!repeat',''))
+		send(TEXT.replace('!repeat','',1))
 
 	if '!hate' in TEXT:
-		shortened = TEXT.replace('!hate','')
+		shortened = TEXT.replace('!hate','',1)
 		enemy = re.sub('[\W+]','',shortened.split()[0].title())
 		send(enemy+', I HATE you!')
