@@ -1,5 +1,8 @@
-import json, os, re, random
+import json, os, re, random, wrbcommands
 from send import send
+
+import ewrb_test
+
 
 def application(environ, start_response):
 	REQUEST_SIZE = int(environ.get('CONTENT_LENGTH',0))
@@ -9,13 +12,4 @@ def application(environ, start_response):
 	SENDER = JSON['name']
 	TEXT = JSON['text']
 
-	if '!repeat' in TEXT:
-		send(TEXT.replace('!repeat','',1))
-
-	if '!hate' in TEXT:
-		shortened = TEXT.replace('!hate','',1)
-		enemy = re.sub('[\W+]','',shortened.split()[0].title())
-		send(enemy+', I HATE you!')
-
-	if '!flip' in TEXT:
-		send(random.choice(['Heads!','Tails!']));
+	wrbcommands.handle(SENDER, TEXT)

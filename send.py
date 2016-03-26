@@ -1,7 +1,5 @@
 import requests,json
 
-__name__ = 'send'
-
 def send(message, bot_id = 'e18f0a0d058420de66f2e2a387'):
 	url = 'https://api.groupme.com/v3/bots/post'
 	text = message;
