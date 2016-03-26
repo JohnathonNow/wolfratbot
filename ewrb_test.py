@@ -8,10 +8,14 @@ def hi(SENDER, TEXT):
 
 # A more complex command that grabs a random image from imgur
 def img(SENDER, TEXT):
-	r = requests.get('http://imgur.com/random')
-	uid = r.url.split('/')[4]
-	im_url = 'http://i.imgur.com/{}.png'.format(uid)
-	send.sendImage(im_url)
+    failed = True
+    while failed:
+	    r = requests.get('http://imgur.com/random')
+	    uid = r.url.split('/')[4]
+        im_url = 'http://i.imgur.com/{}.png'.format(uid)
+	    verified = requests.get(im_url)
+        failed = not 'removed' in verified.url
+    send.sendImage(im_url)
 
 
 # Next, define the call names for commands
