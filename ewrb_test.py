@@ -14,7 +14,7 @@ def img(SENDER, TEXT):
 	    uid = r.url.split('/')[4]
         im_url = 'http://i.imgur.com/{}.png'.format(uid)
 	    verified = requests.get(im_url)
-        failed = not 'removed' in verified.url
+        failed = 'removed' in verified.url
     send.sendImage(im_url)
 
 
