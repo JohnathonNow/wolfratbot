@@ -1,4 +1,4 @@
-import json, os, re
+import json, os, re, random
 from send import send
 
 def application(environ, start_response):
@@ -16,3 +16,6 @@ def application(environ, start_response):
 		shortened = TEXT.replace('!hate','',1)
 		enemy = re.sub('[\W+]','',shortened.split()[0].title())
 		send(enemy+', I HATE you!')
+
+	if '!flip' in TEXT:
+		send(random.choice(['Heads!','Tails!']));
