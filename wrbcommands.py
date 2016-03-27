@@ -29,8 +29,9 @@ def ihelp(SENDER, TEXT, CMD):
     Get info on !CMD.
     DO NOT TYPE THE ! BEFORE THE COMMAND!'''
     shortened = TEXT.replace(CMD,'',1)
-    arg = '!'+shortened.split()[0]
-    if arg:
+    subarg = shortened.split()
+    if subarg:
+        arg = '!'+subarg[0]
         if arg in COMMANDS:
             helptext = COMMANDS[arg].__doc__
             if helptext:
@@ -40,7 +41,7 @@ def ihelp(SENDER, TEXT, CMD):
         else:
             send('Command {} not regonized'.format(arg))
     else:
-        send(__doc__)
+        send(ihelp.__doc__)
 
 # Then, map the functions to command strings
 COMMANDS = {
