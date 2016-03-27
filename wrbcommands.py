@@ -4,16 +4,16 @@ import random, re
 # This is the module responsible for handling executed commands
 
 # First, define some simple commands as functions
-def repeat(SENDER, TEXT):
+def repeat(SENDER, TEXT, CMD):
 	send(TEXT.replace('!repeat','',1))
 
-def hate(SENDER, TEXT):
+def hate(SENDER, TEXT, CMD):
 	send('Hate...')
 	shortened = TEXT.replace('!hate','',1)
 	enemy = re.sub('[\W+]','',shortened.split()[0].title())
 	send('{}, I HATE you!'.format(enemy))
 
-def flip(SENDER, TEXT):
+def flip(SENDER, TEXT, CMD):
 	send(random.choice(['Heads!','Tails!']))	
 
 # Then, map the functions to command strings
@@ -28,4 +28,4 @@ def handle(SENDER, TEXT):
 	global COMMANDS
 	for command in COMMANDS:
 		if command in TEXT:
-			COMMANDS[command](SENDER,TEXT)
+			COMMANDS[command](SENDER,TEXT,command)

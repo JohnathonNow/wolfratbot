@@ -3,11 +3,11 @@ import wrbcommands, requests, send
 # First define the functions that the commands call
 
 # A simple test function
-def hi(SENDER, TEXT):
+def hi(SENDER, TEXT, CMD):
     send.send('Hi..')
 
 # A more complex command that grabs a random image from imgur
-def img(SENDER, TEXT):
+def img(SENDER, TEXT, CMD):
     failed = True
     while failed:
         r = requests.get('http://imgur.com/random')
