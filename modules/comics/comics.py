@@ -2,6 +2,9 @@ import wrbcommands, requests, send, random, re
 
 # Grab a random SMBC comic
 def smbc(SENDER, TEXT, CMD):
+    '''Usage:   !smbc
+
+    Grabs a random smbc comic.'''
     BASE = 'http://smbc-comics.com'
     
     # First we load the page to get the random button url
@@ -18,6 +21,9 @@ def smbc(SENDER, TEXT, CMD):
 
 # Grab a random xkcd comic
 def xkcd(SENDER, TEXT, CMD):
+    '''Usage:   !xkcd
+
+    Grabs a random xkcd comic.'''
     BASE = 'http://c.xkcd.com/random/comic/'
     IMG_BASE = 'http://imgs.xkcd.com/'    
 

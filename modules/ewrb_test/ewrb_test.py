@@ -1,15 +1,10 @@
 import wrbcommands, requests, send
 
 # First define the functions that the commands call
-
-# A simple test function
-def hi(SENDER, TEXT, CMD):
-    send.send('Hi..')
-
-# A more complex command that grabs a random image from imgur
 def img(SENDER, TEXT, CMD):
-    
-    # Check for a numeric argument
+    '''USAGE:   !img[COUNT]
+
+    Grab COUNT (default 1) images from imgur.'''
     COUNT = 1
     for i in TEXT.split():
         if CMD in i:
@@ -35,6 +30,3 @@ def img(SENDER, TEXT, CMD):
 # Next, define the call names for commands
 
 wrbcommands.COMMANDS['!img'] = img
-wrbcommands.COMMANDS['!hi'] = hi
-# Repeats are allowed, and act as aliases
-wrbcommands.COMMANDS['!hello'] = hi

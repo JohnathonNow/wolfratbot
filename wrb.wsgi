@@ -1,6 +1,7 @@
 import json, os, imp, wrbcommands, logging
 def application(environ, start_response):
-    
+
+    BOT_NAME = 'WolfratBot'    
     MOD_DIR = '/var/www/modules'
     LOG_FILE = '/tmp/loader.log'
     
@@ -24,5 +25,5 @@ def application(environ, start_response):
                 except:
                     logging.warning('Module {} failed to load.'.format(modname))
 
-
-    wrbcommands.handle(SENDER, TEXT)
+    if SENDER != BOT_NAME:
+        wrbcommands.handle(SENDER, TEXT)
