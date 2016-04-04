@@ -1,0 +1,24 @@
+# Quotes - maps triggers to quotes
+-  
+    triggers:
+        - "roar, zabimaru"
+        - "roar zabimaru"
+    quote: "Bleach sucks."
+-  
+    triggers:
+        - "i think"
+    quote: "I'm sorry, {SENDER}, your opinion means very little to me."
+-  
+    triggers:
+        - "fallout"
+        - "crawl"
+    quote: "Game of the year!"
+-  
+    triggers:
+        - "i've got"
+    quote: "Too much *clap clap* time on my hands!"
+-  
+    triggers:
+        - "hey now"
+        - "hey, now"
+    quote: "You're a rockstar?"

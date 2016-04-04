@@ -3,6 +3,12 @@ import random, re
 
 # This is the module responsible for handling executed commands
 
+# Commands are stored in a dict mapping the command string to a command function
+# Command functons take three arguments - the sender, message, and the command that was used
+# (The cmd argument is passed because multiple strings can map to the same function)
+
+# Handler functions are stored in a list, and they take the sender and message as arguments
+
 # First, define some simple commands as functions
 def repeat(SENDER, TEXT, CMD):
     send(TEXT.replace(CMD,'',1))
@@ -15,6 +21,8 @@ def hate(SENDER, TEXT, CMD):
     shortened = TEXT.replace(CMD,'',1)
     enemy = re.sub('[\W+]','',shortened.split()[0].title())
     send('{}, I HATE you!'.format(enemy))
+    if random.randin(1,10) <= 1:
+        send('And, {}, I hate you too!'.format(SENDER))
 
 def flip(SENDER, TEXT, CMD):
     '''Usage:   !flip
@@ -22,6 +30,14 @@ def flip(SENDER, TEXT, CMD):
     Flips a join and sends the result to the chat.'''
     send(random.choice(['Heads!','Tails!']))	
 
+
+def listings(SENDER, TEXT, CMD):
+    '''Usage:   !list
+
+    Lists all the commands you can use.'''
+    commands = '\n'.join(sorted(COMMANDS))
+    send('All of the valid commands are:')
+    send(commands)
 
 def ihelp(SENDER, TEXT, CMD):
     '''Usage:   !help CMD
@@ -48,14 +64,19 @@ COMMANDS = {
 '!help': ihelp,
 '!hate': hate,
 '!repeat': repeat,
-'!flip': flip
+'!flip': flip,
+'!list': listings
 }
+
+# A dict for storying functions that handle 
+HANDLERS = []
 
 # Finally, handle the commands and call the mapped function
 def handle(SENDER, TEXT):
     global COMMANDS
     for command in COMMANDS:
-        if command in TEXT:
+        if command.lower() in TEXT.lower():
             COMMANDS[command](SENDER,TEXT,command)
-
+    for handler in HANDLERS:
+        handler(SENDER,TEXT)
 
