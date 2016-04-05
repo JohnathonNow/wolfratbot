@@ -7,7 +7,10 @@ def handler(SENDER, TEXT):
     for quote in quotes:
         for trigger in quote['triggers']:
             if trigger.lower() in TEXT.lower():
-                send.send(quote['quote'].format(SENDER=SENDER))
+                if 'image' in quote:
+                    send.sendImage(quote['image'],quote.get('quote',''))
+                else:
+                    send.send(quote['quote'].format(SENDER=SENDER))
                 break
 
 wrbcommands.HANDLERS.append(handler)

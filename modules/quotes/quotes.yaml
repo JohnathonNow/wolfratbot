@@ -22,3 +22,12 @@
         - "hey now"
         - "hey, now"
     quote: "You're a rockstar?"
+-  
+    triggers:
+        - "i can't"
+    quote: "Can't, or won't?"
+-  
+    triggers:
+        - "test"
+    image: "https://sidoxia.files.wordpress.com/2012/10/apple-pie.jpg"
+    quote: "BOB DOLE"
