@@ -13,4 +13,4 @@ def handler(SENDER, TEXT):
                     send.send(quote['quote'].format(SENDER=SENDER))
                 break
 
-wrbcommands.HANDLERS.append(handler)
+wrbcommands.HANDLERS.add(handler)

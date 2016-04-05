@@ -68,8 +68,8 @@ COMMANDS = {
 '!list': listings
 }
 
-# A dict for storying functions that handle 
-HANDLERS = []
+# A set for storying functions that handle 
+HANDLERS = set()
 
 # Finally, handle the commands and call the mapped function
 def handle(SENDER, TEXT):

@@ -28,6 +28,25 @@
     quote: "Can't, or won't?"
 -  
     triggers:
-        - "test"
-    image: "https://sidoxia.files.wordpress.com/2012/10/apple-pie.jpg"
-    quote: "BOB DOLE"
+       - "hello"
+       - "hallo"
+       - "hola"
+       - "hey"
+       - "hi"
+    quote: "I've waited here for you."
+-  
+    triggers:
+       - "it's a bus"
+    quote: ""
+    image: "https://www.thomasbus.com/_img/our_buses/bus_lg_school_efx_02.jpg"
+-  
+    triggers:
+       - "guess"
+    quote: ""
+    image: "http://i.imgur.com/t9Kkt8h.jpg"
+-  
+    triggers:
+       - "pepe"
+    quote: ""
+    image: "http://in1.ccio.co/P5/qB/E4/a757b8c0569be3aef354923c717b1f99.jpg"
+

@@ -14,6 +14,7 @@ def application(environ, start_response):
     SENDER = JSON['name']
     TEXT = JSON['text']
         
+    wrbcommands.HANDLERS.clear()
 
     for dirpath,dirs,files in os.walk(MOD_DIR):
         for filename in files:
