@@ -23,19 +23,19 @@ if ($_GET[trig] != '') // ensure the form was propery submitted
     $triggers = explode("\n",$_GET[trig]); // list of triggers, line deliminated
     foreach ($triggers as $t)
     {
-        $t = strtolower(trim($t)); // trim whitespace + make lowercase
+        $t = addslashes(strtolower(trim($t))); // trim whitespace + make lowercase
         if ($t != '') // ensure this isn't a blank line
         {
             $data = $data . "       - \"" . $t . "\"\n"; // add to the data
         }
     }
 
-    $data = $data . "    quote: \"" . $_GET[repl] . "\"\n"; // add quote
+    $data = $data . "    quote: \"" . addslashes($_GET[repl]) . "\"\n"; // add quote
 
     if ($_GET[imgr] != '') // check if the image is provided
     {
         // if so, add it to the data
-        $data = $data . "    image: \"" . $_GET[imgr] . "\"\n";  
+        $data = $data . "    image: \"" . addslashes($_GET[imgr]) . "\"\n";  
     }
 
     // try to write and provide the appropriate response
