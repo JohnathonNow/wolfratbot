@@ -29,10 +29,6 @@
 -  
     triggers:
        - "hello"
-       - "hallo"
-       - "hola"
-       - "hey"
-       - "hi"
     quote: "I've waited here for you."
 -  
     triggers:
@@ -49,4 +45,8 @@
        - "pepe"
     quote: ""
     image: "http://in1.ccio.co/P5/qB/E4/a757b8c0569be3aef354923c717b1f99.jpg"
-
+-  
+    triggers:
+       - "dense"
+    quote: ""
+    image: "http://i.imgur.com/eKupgRZ.png"
