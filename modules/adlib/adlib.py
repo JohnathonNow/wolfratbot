@@ -18,15 +18,6 @@ def randLine(fname):
     f.close()   
     return line.strip()
 
-def randAdje():
-    return randLine(ADJES)
-
-def randNoun():
-    return randLine(NOUNS)
-
-def randVerb():
-    return randLine(VERBS)
-
 def adlib(SENDER, TEXT, CMD):
     '''Usage:   !ad STORY
 
@@ -35,16 +26,13 @@ def adlib(SENDER, TEXT, CMD):
     {n}     -   NOUN
     {a}     -   ADJECTIVE
     {v}     -   VERB'''
-    toRep = {'{n}': randNoun, '{a}': randAdje, '{v}': randVerb}
+    toRep = {'{n}': NOUNS, '{a}': ADJES, '{v}': VERBS}
     message = TEXT.replace(CMD,'',1);
-    run = True
-    while run:
-        run = False
-        for rep in toRep:
-            new_message = message.replace(rep,toRep[rep](),1)
-            if new_message != message:
-                message = new_message
-                run = True
+    for rep in toRep:
+        while rep in message:
+            message = message.replace(rep,randLine(toRep[rep]),1)
+
     send.send(message)
 
-wrbcommands.COMMANDS['!ad'] = adlib
+if __name__ != '__main__':
+    wrbcommands.COMMANDS['!ad'] = adlib

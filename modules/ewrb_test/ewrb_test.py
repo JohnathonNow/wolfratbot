@@ -29,4 +29,5 @@ def img(SENDER, TEXT, CMD):
 
 # Next, define the call names for commands
 
-wrbcommands.COMMANDS['!img'] = img
+if __name__ != '__main__':
+    wrbcommands.COMMANDS['!img'] = img

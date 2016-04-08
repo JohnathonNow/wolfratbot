@@ -3,7 +3,7 @@ def application(environ, start_response):
 
     BOT_NAME = 'WolfratBot'    
     MOD_DIR = '/var/www/modules'
-    LOG_FILE = '/tmp/loader.log'
+    LOG_FILE = '/tmp/wrb.log'
     
     logging.basicConfig(filename=LOG_FILE,level=logging.WARNING)
     
@@ -23,8 +23,11 @@ def application(environ, start_response):
                 modpath = os.path.join(dirpath,filename)
                 try:
                     imp.load_source(modname,modpath)
-                except:
-                    logging.warning('Module {} failed to load.'.format(modname))
+                except Exception as E:
+                    logging.warning('Module %s failed to load. Exception: %s', modname, E)
 
     if SENDER != BOT_NAME:
-        wrbcommands.handle(SENDER, TEXT)
+        try:
+            wrbcommands.handle(SENDER, TEXT)
+        except Exception as E:
+            logging.exception("CRITICAL PROBLEM! Error: %s Dump: %s", E, JSON)

@@ -50,3 +50,12 @@
        - "dense"
     quote: ""
     image: "http://i.imgur.com/eKupgRZ.png"
+-  
+    triggers:
+       - "too much"
+    quote: ""
+    image: "http://i.imgur.com/7E5xfrL.jpg"
+-  
+    triggers:
+       - "why"
+    quote: "Why, Mr. Anderson? Why?"

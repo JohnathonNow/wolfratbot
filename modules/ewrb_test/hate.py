@@ -5,5 +5,6 @@ def hating(SENDER,MESSAGE,CMD):
 
 # Next, define the call names for commands
 
-wrbcommands.COMMANDS['hate'] = hating
-wrbcommands.COMMANDS['love'] = hating
+if __name__ != '__main__':
+    wrbcommands.COMMANDS['hate'] = hating
+    wrbcommands.COMMANDS['love'] = hating

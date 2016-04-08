@@ -1,5 +1,5 @@
 from send import send
-import random, re
+import random, re, sys
 
 # This is the module responsible for handling executed commands
 
@@ -59,13 +59,17 @@ def ihelp(SENDER, TEXT, CMD):
     else:
         send(ihelp.__doc__)
 
+def info(SENDER, TEXT, CMD):
+    send('\n'.join(sys.path))
+
 # Then, map the functions to command strings
 COMMANDS = {
 '!help': ihelp,
 '!hate': hate,
 '!repeat': repeat,
 '!flip': flip,
-'!list': listings
+'!list': listings,
+'!v': info
 }
 
 # A set for storying functions that handle 
