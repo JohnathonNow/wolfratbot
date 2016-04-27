@@ -59,3 +59,38 @@
     triggers:
        - "why"
     quote: "Why, Mr. Anderson? Why?"
+-  
+    triggers:
+       - "see"
+    quote: "No, I can't see; I don't have eyes."
+-  
+    triggers:
+       - "thanks"
+    quote: "Can it!"
+-  
+    triggers:
+       - "perfect"
+    quote: ""
+    image: "https://i.groupme.com/500x330.gif.e418f123357d4170b8861a8b3dc52d16"
+-  
+    triggers:
+       - "excellent"
+    quote: ""
+    image: "http://media2.giphy.com/media/IeLOBZb7ZdQ1G/giphy.gif"
+-  
+    triggers:
+       - "evil"
+    quote: ""
+    image: "http://i.imgur.com/GsHwFWZ.jpg"
+-  
+    triggers:
+       - "unacceptable"
+    quote: ""
+    image: "https://i.groupme.com/320x240.gif.fb5012d0112e451dac92af62cc8b8cf1"
+-  
+    triggers:
+       - "i don't care"
+       - "nobody cares"
+       - "coxgif1"
+    quote: ""
+    image: "http://i.imgur.com/pgrhjxzh.gif"

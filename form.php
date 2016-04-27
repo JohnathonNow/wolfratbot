@@ -18,9 +18,9 @@ $file = '/home/john/wolfratbot/modules/quotes/quotes.yaml';
 
 $data = "-  \n    triggers:\n"; // string for holding what we're writing
 
-if ($_GET[trig] != '') // ensure the form was propery submitted
+if ($_POST['trig'] != '') // ensure the form was propery submitted
 {
-    $triggers = explode("\n",$_GET[trig]); // list of triggers, line deliminated
+    $triggers = explode("\n",$_POST['trig']); // list of triggers, line deliminated
     foreach ($triggers as $t)
     {
         $t = addslashes(strtolower(trim($t))); // trim whitespace + make lowercase
@@ -30,12 +30,12 @@ if ($_GET[trig] != '') // ensure the form was propery submitted
         }
     }
 
-    $data = $data . "    quote: \"" . addslashes($_GET[repl]) . "\"\n"; // add quote
+    $data = $data . "    quote: \"" . addslashes($_POST['repl']) . "\"\n"; // add quote
 
-    if ($_GET[imgr] != '') // check if the image is provided
+    if ($_POST['imgr'] != '') // check if the image is provided
     {
         // if so, add it to the data
-        $data = $data . "    image: \"" . addslashes($_GET[imgr]) . "\"\n";  
+        $data = $data . "    image: \"" . addslashes($_POST['imgr']) . "\"\n";  
     }
 
     // try to write and provide the appropriate response
@@ -104,7 +104,7 @@ if ($_GET[trig] != '') // ensure the form was propery submitted
 </style>
 </head>
 <body>
-<form class="form-style-7">
+<form class="form-style-7" method="post">
 <ul>
 <li>
     <label for="trig">Trigger</label>
