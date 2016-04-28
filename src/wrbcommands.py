@@ -1,4 +1,3 @@
-import send as sender
 import random, re, sys
 
 # This is the module responsible for handling executed commands
@@ -11,24 +10,24 @@ import random, re, sys
 
 # First, define some simple commands as functions
 def repeat(SENDER, TEXT, CMD, send):
-    sender.send(TEXT.replace(CMD,'',1))
+    send.send(TEXT.replace(CMD,'',1))
 
 def hate(SENDER, TEXT, CMD, send):
     '''Usage:   !hate PERSON 
 
     Tells PERSON that I hate them.'''
-    sender.send('Hate...')
+    send.send('Hate...')
     shortened = TEXT.replace(CMD,'',1)
     enemy = re.sub('[\W+]','',shortened.split()[0].title())
-    sender.send('{}, I HATE you!'.format(enemy))
+    send.send('{}, I HATE you!'.format(enemy))
     if random.randin(1,10) <= 1:
-        sender.send('And, {}, I hate you too!'.format(SENDER))
+        send.send('And, {}, I hate you too!'.format(SENDER))
 
 def flip(SENDER, TEXT, CMD, send):
     '''Usage:   !flip
 
     Flips a join and sends the result to the chat.'''
-    sender.send(random.choice(['Heads!','Tails!']))	
+    send.send(random.choice(['Heads!','Tails!']))	
 
 
 def listings(SENDER, TEXT, CMD, send):
@@ -36,8 +35,8 @@ def listings(SENDER, TEXT, CMD, send):
 
     Lists all the commands you can use.'''
     commands = '\n'.join(sorted(COMMANDS))
-    sender.send('All of the valid commands are:')
-    sender.send(commands)
+    send.send('All of the valid commands are:')
+    send.send(commands)
 
 def ihelp(SENDER, TEXT, CMD, send):
     '''Usage:   !help CMD
@@ -51,16 +50,16 @@ def ihelp(SENDER, TEXT, CMD, send):
         if arg in COMMANDS:
             helptext = COMMANDS[arg].__doc__
             if helptext:
-                sender.send(helptext)
+                send.send(helptext)
             else:
-                sender.send('No help information for {}'.format(arg))
+                send.send('No help information for {}'.format(arg))
         else:
-            sender.send('Command {} not regonized'.format(arg))
+            send.send('Command {} not regonized'.format(arg))
     else:
-        sender.send(ihelp.__doc__)
+        send.send(ihelp.__doc__)
 
 def info(SENDER, TEXT, CMD, send):
-    sender.send('\n'.join(sys.path))
+    send.send('\n'.join(sys.path))
 
 # Then, map the functions to command strings
 COMMANDS = {
@@ -86,11 +85,11 @@ def addModule(m):
         pass
 
 # Finally, handle the commands and call the mapped function
-def handle(SENDER, TEXT):
+def handle(SENDER, TEXT, send):
     global COMMANDS
     for command in COMMANDS:
         if command.lower() in TEXT.lower():
-            COMMANDS[command](SENDER,TEXT,command,sender)
+            COMMANDS[command](SENDER,TEXT,command,send)
     for handler in HANDLERS:
-        handler(SENDER,TEXT,sender)
+        handler(SENDER,TEXT,send)
 

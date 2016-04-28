@@ -32,6 +32,7 @@ def application(environ, start_response):
 
     if SENDER != BOT_NAME:
         try:
-            wrbcommands.handle(SENDER, TEXT)
+            sender = send()
+            wrbcommands.handle(SENDER, TEXT, sender)
         except Exception as E:
             logging.exception("CRITICAL PROBLEM! Error: %s Dump: %s", E, JSON)
