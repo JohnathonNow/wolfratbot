@@ -12,4 +12,4 @@ def youtube(SENDER, TEXT, CMD, send):
     send.send('https://www.youtube.com/'+res[0])
 
 # Define command mappings
-COMMANDS['!yt'] = youtube
+COMMANDS = {'!yt': youtube}

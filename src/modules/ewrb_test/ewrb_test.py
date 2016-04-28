@@ -29,4 +29,4 @@ def img(SENDER, TEXT, CMD, send):
 
 # Next, define the call names for commands
 
-wrbcommands.COMMANDS['!img'] = img
+COMMANDS = {'!img': img}

@@ -3,5 +3,5 @@ def hating(SENDER,MESSAGE,CMD,send):
 
 # Next, define the call names for commands
 
-wrbcommands.COMMANDS['hate'] = hating
-wrbcommands.COMMANDS['love'] = hating
+COMMANDS {'hate': hating,
+          'love': hating}
