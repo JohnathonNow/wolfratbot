@@ -2,7 +2,7 @@ ENCRYPTION=openssl cast5-cbc
 ENCRYPT=$(ENCRYPTION) -e
 DECRYPT=$(ENCRYPTION) -d
 
-GIT_ADD=src/* Makefile README.md conf/*
+GIT_ADD=src/* Makefile README.md conf/* .gitignore
 
 all:
 
