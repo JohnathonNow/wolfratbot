@@ -1,6 +1,6 @@
 import wrbcommands, send, random, os
 
-DIR = '/home/john/wolfratbot/modules/adlib/'
+DIR = '/home/john/wolfratbot/src/modules/adlib/'
 ADJES = DIR + 'adjectivelist.txt'
 NOUNS = DIR + 'nounlist.txt'
 VERBS = DIR + 'verblist.txt'

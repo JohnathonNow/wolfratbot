@@ -1,6 +1,6 @@
 import wrbcommands, send, yaml
 
-QUOTES = '/home/john/wolfratbot/modules/quotes/quotes.yaml'
+QUOTES = '/home/john/wolfratbot/src/modules/quotes/quotes.yaml'
 
 def handler(SENDER, TEXT):
     quotes = yaml.load(file(QUOTES,'r'))
