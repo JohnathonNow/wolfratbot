@@ -1,7 +1,8 @@
-import wrbcommands, requests, send, re
+import requests
+import re
 
 # grab youtube video from search
-def youtube(SENDER, TEXT, CMD):
+def youtube(SENDER, TEXT, CMD, send):
     '''Usage:   !yt SEARCH
     
     Grabs the first youtube video upon searching SEARCH.'''
@@ -11,7 +12,4 @@ def youtube(SENDER, TEXT, CMD):
     send.send('https://www.youtube.com/'+res[0])
 
 # Define command mappings
-if __name__ == '__main__':
-    youtube('','!yt she\'s so high','!yt')
-else:
-    wrbcommands.COMMANDS['!yt'] = youtube
+COMMANDS['!yt'] = youtube

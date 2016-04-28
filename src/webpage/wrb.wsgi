@@ -14,15 +14,14 @@ def application(environ, start_response):
     SENDER = JSON['name']
     TEXT = JSON['text']
         
-    wrbcommands.HANDLERS.clear()
-
     for dirpath,dirs,files in os.walk(MOD_DIR):
         for filename in files:
             if '.py' in filename[-3:]:
                 modname = filename[:-3]
                 modpath = os.path.join(dirpath,filename)
                 try:
-                    imp.load_source(modname,modpath)
+                    m = imp.load_source(modname,modpath)
+                    wrbcommands.addModule(m)
                 except Exception as E:
                     logging.warning('Module %s failed to load. Exception: %s', modname, E)
 

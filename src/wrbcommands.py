@@ -1,4 +1,4 @@
-from send import send
+from send import send as sender
 import random, re, sys
 
 # This is the module responsible for handling executed commands
@@ -10,10 +10,10 @@ import random, re, sys
 # Handler functions are stored in a list, and they take the sender and message as arguments
 
 # First, define some simple commands as functions
-def repeat(SENDER, TEXT, CMD):
+def repeat(SENDER, TEXT, CMD, send):
     send(TEXT.replace(CMD,'',1))
 
-def hate(SENDER, TEXT, CMD):
+def hate(SENDER, TEXT, CMD, send):
     '''Usage:   !hate PERSON 
 
     Tells PERSON that I hate them.'''
@@ -24,14 +24,14 @@ def hate(SENDER, TEXT, CMD):
     if random.randin(1,10) <= 1:
         send('And, {}, I hate you too!'.format(SENDER))
 
-def flip(SENDER, TEXT, CMD):
+def flip(SENDER, TEXT, CMD, send):
     '''Usage:   !flip
 
     Flips a join and sends the result to the chat.'''
     send(random.choice(['Heads!','Tails!']))	
 
 
-def listings(SENDER, TEXT, CMD):
+def listings(SENDER, TEXT, CMD, send):
     '''Usage:   !list
 
     Lists all the commands you can use.'''
@@ -39,7 +39,7 @@ def listings(SENDER, TEXT, CMD):
     send('All of the valid commands are:')
     send(commands)
 
-def ihelp(SENDER, TEXT, CMD):
+def ihelp(SENDER, TEXT, CMD, send):
     '''Usage:   !help CMD
 
     Get info on !CMD.
@@ -59,7 +59,7 @@ def ihelp(SENDER, TEXT, CMD):
     else:
         send(ihelp.__doc__)
 
-def info(SENDER, TEXT, CMD):
+def info(SENDER, TEXT, CMD, send):
     send('\n'.join(sys.path))
 
 # Then, map the functions to command strings
@@ -75,12 +75,16 @@ COMMANDS = {
 # A set for storying functions that handle 
 HANDLERS = set()
 
+def addModule(m):
+    COMMANDS.update(m.COMMANDS)
+    HANDLERS.update(m.HANDLERS)
+
 # Finally, handle the commands and call the mapped function
 def handle(SENDER, TEXT):
     global COMMANDS
     for command in COMMANDS:
         if command.lower() in TEXT.lower():
-            COMMANDS[command](SENDER,TEXT,command)
+            COMMANDS[command](SENDER,TEXT,command,s)
     for handler in HANDLERS:
-        handler(SENDER,TEXT)
+        handler(SENDER,TEXT,s)
 

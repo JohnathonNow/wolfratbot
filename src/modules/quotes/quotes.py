@@ -1,8 +1,8 @@
-import wrbcommands, send, yaml
+import yaml
 
 QUOTES = '/home/john/wolfratbot/src/modules/quotes/quotes.yaml'
 
-def handler(SENDER, TEXT):
+def handler(SENDER, TEXT, send):
     quotes = yaml.load(file(QUOTES,'r'))
     for quote in quotes:
         for trigger in quote['triggers']:
@@ -13,5 +13,5 @@ def handler(SENDER, TEXT):
                     send.send(quote['quote'].format(SENDER=SENDER))
                 break
 
-if __name__ != '__main__':
-    wrbcommands.HANDLERS.add(handler)
+HANDLERS = set()
+HANDLERS.add(handler)

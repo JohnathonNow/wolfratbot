@@ -1,7 +1,9 @@
-import wrbcommands, requests, send, random, re
+import requests
+import random
+import re
 
 # Grab a random SMBC comic
-def smbc(SENDER, TEXT, CMD):
+def smbc(SENDER, TEXT, CMD, send):
     '''Usage:   !smbc
 
     Grabs a random smbc comic.'''
@@ -20,7 +22,7 @@ def smbc(SENDER, TEXT, CMD):
     send.sendImage(im_url)
 
 # Grab a random xkcd comic
-def xkcd(SENDER, TEXT, CMD):
+def xkcd(SENDER, TEXT, CMD, send):
     '''Usage:   !xkcd
 
     Grabs a random xkcd comic.'''
@@ -36,6 +38,5 @@ def xkcd(SENDER, TEXT, CMD):
 
 
 # Define command mappings
-if __name__ != '__main__':
-    wrbcommands.COMMANDS['!smbc'] = smbc
-    wrbcommands.COMMANDS['!xkcd'] = xkcd
+COMMANDS['!smbc'] = smbc
+COMMANDS['!xkcd'] = xkcd

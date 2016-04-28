@@ -1,4 +1,5 @@
-import wrbcommands, send, random, os
+import random
+import os
 
 DIR = '/home/john/wolfratbot/src/modules/adlib/'
 ADJES = DIR + 'adjectivelist.txt'
@@ -18,7 +19,7 @@ def randLine(fname):
     f.close()   
     return line.strip()
 
-def adlib(SENDER, TEXT, CMD):
+def adlib(SENDER, TEXT, CMD, send):
     '''Usage:   !ad STORY
 
     Replaces slots in STORY with random categorical words, and sends
@@ -34,5 +35,4 @@ def adlib(SENDER, TEXT, CMD):
 
     send.send(message)
 
-if __name__ != '__main__':
-    wrbcommands.COMMANDS['!ad'] = adlib
+COMMANDS['!ad'] = adlib

@@ -1,7 +1,7 @@
-import wrbcommands, requests, send
+import requests
 
 # First define the functions that the commands call
-def img(SENDER, TEXT, CMD):
+def img(SENDER, TEXT, CMD, send):
     '''USAGE:   !img[COUNT]
 
     Grab COUNT (default 1) images from imgur.'''
@@ -29,5 +29,4 @@ def img(SENDER, TEXT, CMD):
 
 # Next, define the call names for commands
 
-if __name__ != '__main__':
-    wrbcommands.COMMANDS['!img'] = img
+wrbcommands.COMMANDS['!img'] = img
