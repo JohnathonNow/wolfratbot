@@ -15,3 +15,4 @@ def handler(SENDER, TEXT, send):
 
 HANDLERS = set()
 HANDLERS.add(handler)
+COMMANDS = {}

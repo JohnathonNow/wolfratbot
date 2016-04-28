@@ -3,5 +3,6 @@ def hating(SENDER,MESSAGE,CMD,send):
 
 # Next, define the call names for commands
 
-COMMANDS {'hate': hating,
-          'love': hating}
+COMMANDS = {'hate': hating,
+            'love': hating}
+HANDLERS = {}

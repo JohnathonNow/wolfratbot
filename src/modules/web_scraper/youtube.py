@@ -13,3 +13,4 @@ def youtube(SENDER, TEXT, CMD, send):
 
 # Define command mappings
 COMMANDS = {'!yt': youtube}
+HANDLERS = {}

@@ -40,3 +40,4 @@ def xkcd(SENDER, TEXT, CMD, send):
 # Define command mappings
 COMMANDS = {'!smbc': smbc,
             '!xkcd': xkcd}
+HANDLERS = {}

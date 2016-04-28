@@ -1,4 +1,6 @@
 import json, os, imp, wrbcommands, logging
+from send import send
+
 def application(environ, start_response):
 
     BOT_NAME = 'WolfratBot'    
@@ -13,7 +15,7 @@ def application(environ, start_response):
     
     SENDER = JSON['name']
     TEXT = JSON['text']
-        
+
     for dirpath,dirs,files in os.walk(MOD_DIR):
         for filename in files:
             if '.py' in filename[-3:]:
@@ -21,9 +23,12 @@ def application(environ, start_response):
                 modpath = os.path.join(dirpath,filename)
                 try:
                     m = imp.load_source(modname,modpath)
-                    wrbcommands.addModule(m)
                 except Exception as E:
                     logging.warning('Module %s failed to load. Exception: %s', modname, E)
+                try:
+                    wrbcommands.addModule(m)
+                except Exception as E:
+                    logging.warning('Failed to read module %s. Exception: %s', modname, E)
 
     if SENDER != BOT_NAME:
         try:

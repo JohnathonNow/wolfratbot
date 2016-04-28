@@ -30,3 +30,4 @@ def img(SENDER, TEXT, CMD, send):
 # Next, define the call names for commands
 
 COMMANDS = {'!img': img}
+HANDLERS = {}

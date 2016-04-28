@@ -36,3 +36,4 @@ def adlib(SENDER, TEXT, CMD, send):
     send.send(message)
 
 COMMANDS = {'!ad': adlib}
+HANDLERS = {}
