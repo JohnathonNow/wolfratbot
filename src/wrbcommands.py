@@ -72,7 +72,7 @@ COMMANDS = {
 }
 
 # A set for storying functions that handle 
-HANDLERS = set()
+HANDLERS = {}
 
 def addModule(m):
     try:
@@ -91,5 +91,5 @@ def handle(SENDER, TEXT, send):
         if command.lower() in TEXT.lower():
             COMMANDS[command](SENDER,TEXT,command,send)
     for handler in HANDLERS:
-        handler(SENDER,TEXT,send)
+        HANDLERS[handler](SENDER,TEXT,send)
 

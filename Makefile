@@ -1,4 +1,4 @@
-ENCRYPTION=openssl cast5-cbc 
+ENCRYPTION=openssl aes-256-cbc
 ENCRYPT=$(ENCRYPTION) -e
 DECRYPT=$(ENCRYPTION) -d
 

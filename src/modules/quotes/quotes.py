@@ -13,6 +13,5 @@ def handler(SENDER, TEXT, send):
                     send.send(quote['quote'].format(SENDER=SENDER))
                 break
 
-HANDLERS = set()
-HANDLERS.add(handler)
+HANDLERS = {"QuoteHandler":handler}
 COMMANDS = {}
