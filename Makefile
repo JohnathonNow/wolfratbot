@@ -23,3 +23,7 @@ push:
 restart: 
 	sudo /etc/init.d/apache2 restart
 
+clean:
+	find src -name *.pyc -exec 'rm {}' +
+
+# vim: setlocal noexpandtab

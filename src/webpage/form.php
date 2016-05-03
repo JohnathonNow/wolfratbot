@@ -14,7 +14,7 @@
  *     image: "some url, but this field is optional
  */
 // The file to append:
-$file = '/home/john/wolfratbot/modules/quotes/quotes.yaml';
+$file = '/home/john/wolfratbot/src/modules/quotes/quotes.yaml';
 
 $data = "-  \n    triggers:\n"; // string for holding what we're writing
 
@@ -23,19 +23,19 @@ if ($_POST['trig'] != '') // ensure the form was propery submitted
     $triggers = explode("\n",$_POST['trig']); // list of triggers, line deliminated
     foreach ($triggers as $t)
     {
-        $t = addslashes(strtolower(trim($t))); // trim whitespace + make lowercase
+        $t = addcslashes(strtolower(trim($t)),"\"\\"); // trim whitespace + make lowercase
         if ($t != '') // ensure this isn't a blank line
         {
             $data = $data . "       - \"" . $t . "\"\n"; // add to the data
         }
     }
 
-    $data = $data . "    quote: \"" . addslashes($_POST['repl']) . "\"\n"; // add quote
+    $data = $data . "    quote: \"" . addcslashes($_POST['repl'],"\"\\") . "\"\n"; // add quote
 
     if ($_POST['imgr'] != '') // check if the image is provided
     {
         // if so, add it to the data
-        $data = $data . "    image: \"" . addslashes($_POST['imgr']) . "\"\n";  
+        $data = $data . "    image: \"" . addcslashes($_POST['imgr'],"\"\\") . "\"\n";  
     }
 
     // try to write and provide the appropriate response

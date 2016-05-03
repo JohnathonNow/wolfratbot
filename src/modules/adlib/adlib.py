@@ -29,11 +29,14 @@ def adlib(SENDER, TEXT, CMD, send):
     {v}     -   VERB'''
     toRep = {'{n}': NOUNS, '{a}': ADJES, '{v}': VERBS}
     message = TEXT.replace(CMD,'',1);
-    for rep in toRep:
-        while rep in message:
-            message = message.replace(rep,randLine(toRep[rep]),1)
+    if message == '':
+        send.send('You don\'t seem to know what you\'re doing.\nTry !help ad');
+    else:
+        for rep in toRep:
+            while rep in message:
+                message = message.replace(rep,randLine(toRep[rep]),1)
 
-    send.send(message)
+        send.send(message)
 
 COMMANDS = {'!ad': adlib}
 HANDLERS = {}

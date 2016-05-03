@@ -10,6 +10,9 @@ import random, re, sys
 
 # First, define some simple commands as functions
 def repeat(SENDER, TEXT, CMD, send):
+    '''Usage:   !repeat MESSAGE 
+
+    Simply echoes the message.'''
     send.send(TEXT.replace(CMD,'',1))
 
 def hate(SENDER, TEXT, CMD, send):
@@ -33,7 +36,10 @@ def flip(SENDER, TEXT, CMD, send):
 def listings(SENDER, TEXT, CMD, send):
     '''Usage:   !list
 
-    Lists all the commands you can use.'''
+    Lists all the commands you can use.
+
+    For help on a certain command,
+    run !help CMD'''
     commands = '\n'.join(sorted(COMMANDS))
     send.send('All of the valid commands are:')
     send.send(commands)
@@ -42,7 +48,9 @@ def ihelp(SENDER, TEXT, CMD, send):
     '''Usage:   !help CMD
 
     Get info on !CMD.
-    DO NOT TYPE THE ! BEFORE THE COMMAND!'''
+    DO NOT TYPE THE ! BEFORE THE COMMAND!
+
+    For a list of commands, run !list'''
     shortened = TEXT.replace(CMD,'',1)
     subarg = shortened.split()
     if subarg:
