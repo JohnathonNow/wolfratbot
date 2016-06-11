@@ -29,20 +29,18 @@ def hate(SENDER, TEXT, CMD, send):
 def flip(SENDER, TEXT, CMD, send):
     '''Usage:   !flip
 
-    Flips a join and sends the result to the chat.'''
+    Flips a coin and sends the result to the chat.'''
     send.send(random.choice(['Heads!','Tails!']))	
 
 
 def listings(SENDER, TEXT, CMD, send):
     '''Usage:   !list
 
-    Lists all the commands you can use.
-
-    For help on a certain command,
-    run !help CMD'''
+    Lists all the commands you can use.'''
     commands = '\n'.join(sorted(COMMANDS))
     send.send('All of the valid commands are:')
     send.send(commands)
+    send.send('''For help on a certain command, run !help CMD''')
 
 def ihelp(SENDER, TEXT, CMD, send):
     '''Usage:   !help CMD

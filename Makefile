@@ -16,7 +16,7 @@ all:
 
 # Because I am super lazy:
 push: 
-	git add $(GIT_ADD)
+	git add -A $(GIT_ADD)
 	git commit
 	git push
 
@@ -24,6 +24,6 @@ restart:
 	sudo /etc/init.d/apache2 restart
 
 clean:
-	find src -name *.pyc -exec 'rm {}' +
+	find src -name *.pyc -exec rm '{}' \;
 
 # vim: setlocal noexpandtab

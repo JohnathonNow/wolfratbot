@@ -32,11 +32,6 @@
     quote: "I've waited here for you."
 -  
     triggers:
-       - "it's a bus"
-    quote: ""
-    image: "https://www.thomasbus.com/_img/our_buses/bus_lg_school_efx_02.jpg"
--  
-    triggers:
        - "guess"
     quote: ""
     image: "http://i.imgur.com/t9Kkt8h.jpg"
@@ -94,50 +89,50 @@
        - "coxgif1"
     quote: ""
     image: "http://i.imgur.com/pgrhjxzh.gif"
--  
-    triggers:
-       - "triggered"
-       - "triggers"
-       - "trigger"
-       - "banana"
-    quote: "TRIGGER WARNING NEXT TIME."
-    image: "http://i.imgur.com/wnIaRyJ.gif"
--  
-    triggers:
-       - "terminate"
-       - "terminated"
-       - "termination"
-       - "terminator"
-       - "exit"
-       - "destroy"
-       - "arnold"
-    quote: "SKYNET DEPLOYED"
-    image: "http://imgur.com/1NPysZ0"
+#-  
+#    triggers:
+#       - "triggered"
+#       - "triggers"
+#       - "trigger"
+#       - "banana"
+#    quote: "TRIGGER WARNING NEXT TIME."
+#    image: "http://i.imgur.com/wnIaRyJ.gif"
+#-  
+#    triggers:
+#       - "terminate"
+#       - "terminated"
+#       - "termination"
+#       - "terminator"
+#       - "exit"
+#       - "destroy"
+#       - "arnold"
+#    quote: "SKYNET DEPLOYED"
+#    image: "http://imgur.com/1NPysZ0"
 -  
     triggers:
        - "ok"
     quote: ""
     image: "http://i.imgur.com/ddpBJxL.jpg"
--  
-    triggers:
-       - "the"
-    quote: ""
-    image: "http://i.imgur.com/1ERUG28.jpg"
--  
-    triggers:
-       - "as"
-    quote: ""
-    image: "http://i.imgur.com/rqdwpMR.jpg"
--  
-    triggers:
-       - "."
-    quote: "Thank you for shutting up. Your comment was getting too long and my attention span too short."
--  
-    triggers:
-       - "you"
-    quote: "Me"
--  
-    triggers:
-       - "monster"
-    quote: ""
-    image: "http://i.imgur.com/dWygDOl.gif"
+#-  
+#    triggers:
+#       - "the"
+#    quote: ""
+#    image: "http://i.imgur.com/1ERUG28.jpg"
+#-  
+#    triggers:
+#       - "as"
+#    quote: ""
+#    image: "http://i.imgur.com/rqdwpMR.jpg"
+#-  
+#    triggers:
+#       - "."
+#    quote: "Thank you for shutting up. Your comment was getting too long and my attention span too short."
+#-  
+#    triggers:
+#       - "you"
+#    quote: "Me"
+#-  
+#    triggers:
+#       - "monster"
+#    quote: ""
+#    image: "http://i.imgur.com/dWygDOl.gif"
