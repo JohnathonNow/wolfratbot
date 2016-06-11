@@ -23,6 +23,9 @@ push:
 restart: 
 	sudo /etc/init.d/apache2 restart
 
+test:
+	python -B src/main.py
+
 clean:
 	find src -name *.pyc -exec rm '{}' \;
 
