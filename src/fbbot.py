@@ -40,7 +40,7 @@ class Fbbot(object):
                 pass
 
     def send(self, message):
-        self.client.send(self._chat_id, message, self._group)
+        self.client.send(self._chat_id, message, None, self._group)
 
     def sendImage(self, image_url, message = ''):
-        self.client.send(self._chat_id, message + image_url, self._group)        
+        self.client.send(self._chat_id, message + image_url, None, self._group)        

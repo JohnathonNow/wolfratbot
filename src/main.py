@@ -8,8 +8,9 @@ import fbbot
 import imp
 import wrbcommands
 
-CONFIG = "/home/john/wolfratbot/conf/conf.etxt"
-MODS = "/var/www/modules"
+CONFIG = "../conf/conf.etxt"
+MODS = "modules"
+
 PASSWORD = ""
 
 # pretty shamefully taken from StackOverflow
@@ -55,4 +56,7 @@ for dirpath,dirs,files in os.walk(MODS):
             except Exception as E:
                 print E
                 pass
-fbot.listen()
+try:
+    fbot.listen()
+except KeyboardInterrupt:
+    print "Goodbye!"
