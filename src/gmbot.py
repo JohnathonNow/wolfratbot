@@ -46,8 +46,8 @@ class Gmbot(object):
             data.append(dataIn)
             dataIn = stream.readline()
 
-        print data[0].split()[1]
-
+        bot = data[0].split()[1]
+        print bot
         stream.write('\r\n')
         stream.flush()
 
@@ -55,5 +55,7 @@ class Gmbot(object):
             data.append(dataIn)
             dataIn = stream.readline()
 
-        print data[len(data)-1]
+        msgdata = json.loads(data[len(data)-1])
+
+        print msgdata
         stream.close()
