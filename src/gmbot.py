@@ -45,10 +45,10 @@ class Gmbot(object):
         while dataIn != '' and dataIn != '\r\n':
             data.append(dataIn)
             dataIn = stream.readline()
-        print data[0]
+        print data[0].split()[1]
         stream.write('\r\n')
         stream.flush()
-        while dataIn != '' and dataIn != '\r\n':
+        while dataIn != '':
             data.append(dataIn)
             dataIn = stream.readline()
         print data[len(data)-1]
