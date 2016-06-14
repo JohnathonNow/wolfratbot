@@ -41,7 +41,7 @@ class Gmbot(object):
         stream = client.makefile('w+')
         data = []
         dataIn = stream.readline()
-        while dataIn != '' and dataIn != '\r\n':
+        while dataIn != '':
             data.append(dataIn)
             dataIn = stream.readline()
         print data[0]
