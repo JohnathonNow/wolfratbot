@@ -1,19 +1,13 @@
-import requests,json
+import requests
+import json
+import thread
 
 class Gmbot(object):
     def __init__(self, bot_id = 'e18f0a0d058420de66f2e2a387'):
     self.bot_id = bot_id
 
     def on_chat(self, fbid, who, msg):
-        if 'otherUserFbId' in fbid:
-            self._chat_id = fbid['otherUserFbId']
-            self._group = False
-        else:
-            self._chat_id = fbid['threadFbId']
-            self._group = True
-
-        if str(who) != str(self.client.uid):
-            wrbcommands.handle(str(who), msg, self)
+        wrbcommands.handle(str(who), msg, self)
 
     # Send a text message as a GroupMe bot
     def send(self,message):
@@ -33,3 +27,21 @@ class Gmbot(object):
                 'url': image_url
         }]}
         requests.post(url, data=json.dumps(payload))
+
+    def listen(self, port):
+        self.socket.bind(('0.0.0.0', port))
+        self.socket.listen(0) 
+        while True:
+            client, address = self.socket.accept()
+            self.handle(client)
+        thread.start_new_thread(Gmbot.handle, (self, client, ))
+
+    def handle(self, client):
+        stream = client.makefile('w+')
+        data = []
+        dataIn = self.stream.readline()
+        while dataIn != '' and dataIn != '\r\n':
+            data.append(dataIn)
+            dataIn = self.stream.readline()
+        print data[0]
+        print data[len(data)-1]

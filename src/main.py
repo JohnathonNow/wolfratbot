@@ -1,3 +1,4 @@
+#!/usr/bin/python -B
 from Crypto.Cipher import AES
 from Crypto import Random
 from hashlib import md5
