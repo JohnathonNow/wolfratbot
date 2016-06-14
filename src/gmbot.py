@@ -56,6 +56,10 @@ class Gmbot(object):
             dataIn = stream.readline()
 
         msgdata = json.loads(data[len(data)-1])
+        msgtxt = msgdata['text']
+        msgsender = msgdata['name']
 
-        print msgdata
+        print msgtxt
+        print msgsender
+
         stream.close()
