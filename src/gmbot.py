@@ -4,7 +4,7 @@ import thread
 
 class Gmbot(object):
     def __init__(self, bot_id = 'e18f0a0d058420de66f2e2a387'):
-    self.bot_id = bot_id
+        self.bot_id = bot_id
 
     def on_chat(self, fbid, who, msg):
         wrbcommands.handle(str(who), msg, self)
@@ -29,19 +29,20 @@ class Gmbot(object):
         requests.post(url, data=json.dumps(payload))
 
     def listen(self, port):
-        self.socket.bind(('0.0.0.0', port))
-        self.socket.listen(0) 
+        socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+        socket.bind(('0.0.0.0', port))
+        socket.listen(0) 
         while True:
-            client, address = self.socket.accept()
+            client, address = socket.accept()
             self.handle(client)
         thread.start_new_thread(Gmbot.handle, (self, client, ))
 
     def handle(self, client):
         stream = client.makefile('w+')
         data = []
-        dataIn = self.stream.readline()
+        dataIn = stream.readline()
         while dataIn != '' and dataIn != '\r\n':
             data.append(dataIn)
-            dataIn = self.stream.readline()
+            dataIn = stream.readline()
         print data[0]
         print data[len(data)-1]
