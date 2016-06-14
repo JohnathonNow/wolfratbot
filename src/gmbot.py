@@ -1,6 +1,7 @@
 import requests
 import json
 import thread
+import socket
 
 class Gmbot(object):
     def __init__(self, bot_id = 'e18f0a0d058420de66f2e2a387'):
@@ -29,11 +30,11 @@ class Gmbot(object):
         requests.post(url, data=json.dumps(payload))
 
     def listen(self, port):
-        socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-        socket.bind(('0.0.0.0', port))
-        socket.listen(0) 
+        sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+        sock.bind(('0.0.0.0', port))
+        sock.listen(0) 
         while True:
-            client, address = socket.accept()
+            client, address = sock.accept()
             self.handle(client)
         thread.start_new_thread(Gmbot.handle, (self, client, ))
 
