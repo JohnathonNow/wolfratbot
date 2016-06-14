@@ -35,20 +35,25 @@ class Gmbot(object):
         sock.listen(0) 
         while True:
             client, address = sock.accept()
-            self.handle(client)
-        thread.start_new_thread(Gmbot.handle, (self, client, ))
+            thread.start_new_thread(Gmbot.handle, (self, client, ))
 
     def handle(self, client):
         stream = client.makefile('w+')
+
         data = []
         dataIn = stream.readline()
         while dataIn != '' and dataIn != '\r\n':
             data.append(dataIn)
             dataIn = stream.readline()
+
         print data[0].split()[1]
+
         stream.write('\r\n')
         stream.flush()
+
         while dataIn != '':
             data.append(dataIn)
             dataIn = stream.readline()
+
         print data[len(data)-1]
+        stream.close()
