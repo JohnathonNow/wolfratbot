@@ -8,10 +8,10 @@ class Fbbot(object):
     def on_chat(self, fbid, who, msg):
         if 'otherUserFbId' in fbid:
             self._chat_id = fbid['otherUserFbId']
-            self._group = False
+            self._group = 'user'
         else:
             self._chat_id = fbid['threadFbId']
-            self._group = True
+            self._group = 'group'
 
         if str(who) != str(self.client.uid):
             wrbcommands.handle(str(who), msg, self)
@@ -21,6 +21,7 @@ class Fbbot(object):
         for m in content['ms']:
             if m['type'] in ['delta'] and m['delta']['class'] in ['NewMessage']:
                 body = m['delta']['body']
+                print body
                 fbid = m['delta']['messageMetadata']['threadKey']
                 who  = m['delta']['messageMetadata']['actorFbId']
                 self.on_chat(fbid, who, body)
@@ -32,6 +33,7 @@ class Fbbot(object):
             try:
                 self.client.ping(sticky)
                 content = self.client._pullMessage(sticky, pool)
+                #print content
                 if content:
                     self.parseMessage(content)
             except (KeyboardInterrupt, SystemExit):
@@ -40,7 +42,7 @@ class Fbbot(object):
                 pass
 
     def send(self, message):
-        self.client.send(self._chat_id, message, None, self._group)
+        self.client.send(self._chat_id, message, self._group)
 
     def sendImage(self, image_url, message = ''):
-        self.client.send(self._chat_id, message + image_url, None, self._group)        
+        self.client.send(self._chat_id, message + image_url, self._group, None)

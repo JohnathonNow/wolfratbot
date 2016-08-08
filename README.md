@@ -1,4 +1,4 @@
-wolfratbot
+wolfratboT
 =========
 A simple, modular chatbot.  
 ---------
@@ -25,7 +25,7 @@ Dependencies:
 ---------
   - pyyaml  
   - requests  
-  - fbchat (at the moment I recommend my fork)
+  - fbchat (at the moment I recommend thekindlyone's fork)
   - lxml  
 
 Setup:

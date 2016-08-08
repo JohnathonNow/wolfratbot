@@ -1,8 +1,9 @@
-import json, os, imp, wrbcommands, logging
+import json, os, imp, wrbcommands, logging, sys, random
 from send import send
 
 def application(environ, start_response):
-
+    if random.randint(1, 3) != 1:
+        sys.exit(0);
     BOT_NAME = 'WolfratBot'    
     MOD_DIR = '/var/www/modules'
     LOG_FILE = '/tmp/wrb.log'

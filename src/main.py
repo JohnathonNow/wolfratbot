@@ -1,4 +1,4 @@
-#!/usr/bin/python -B
+#!/home/john/bin/anaconda2/bin/python -B
 from Crypto.Cipher import AES
 from Crypto import Random
 from hashlib import md5
