@@ -6,8 +6,11 @@ import yaml
 import getpass
 import os
 import fbbot
+import gmbot
+import time
 import imp
 import wrbcommands
+import thread
 
 CONFIG = "../conf/conf.etxt"
 MODS = "modules"
@@ -43,8 +46,6 @@ PASSWORD = getpass.getpass("Enter key for {}:".format(os.path.basename(CONFIG)))
 with open(CONFIG) as in_file:
     conf = yaml.load(decrypt(in_file,PASSWORD))
 
-fbot = fbbot.Fbbot(conf['facebook']['username'], conf['facebook']['password'])
-print 'Logged in!'
 for dirpath,dirs,files in os.walk(MODS):
     for filename in files:
         if '.py' in filename[-3:]:
@@ -57,7 +58,18 @@ for dirpath,dirs,files in os.walk(MODS):
             except Exception as E:
                 print E
                 pass
+                
+fb_thread = None
+gm_thread = None
 try:
-    fbot.listen()
+    if 'facebook' in conf:
+        fbot = fbbot.Fbbot(conf['facebook']['username'], conf['facebook']['password'])
+        fb_thread = thread.start_new_thread(fbbot.Fbbot.listen, (fbot,))
+    if 'groupme' in conf:
+        gm_thread = thread.start_new_thread(gmbot.listen, (conf['groupme']['port'],))
+        for bot in conf['groupme']['bots']:
+            gmbot.addBot(bot['path'], gmbot.Gmbot(bot['botid'], bot['name']))
+    while True:
+        time.sleep(10)
 except KeyboardInterrupt:
     print "Goodbye!"

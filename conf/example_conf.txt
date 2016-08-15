@@ -3,7 +3,8 @@ facebook:
     password:   "PASSWORD"
     chatid:     "THE CHAT IT IS IN [unused currently]"
 groupme:
-    port:           PORTNUMBER [unused currently]
+    port:           PORTNUMBER
     bots:
-        -  botid:  "GROUPME API KEY [unused currently]"
-           path:   "CALLBACK PATH [unused currently]"
+        -  botid:  "GROUPME API KEY"
+           path:   "CALLBACK PATH"
+           name:   "BOT NAME"

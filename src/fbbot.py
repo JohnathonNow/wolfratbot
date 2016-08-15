@@ -1,9 +1,22 @@
 import fbchat
 import wrbcommands
 
+MAX_ATTEMPTS = 3
+
 class Fbbot(object):
     def __init__(self, user, passw):
-        self.client = fbchat.Client(user, passw)
+        fail_count = 0
+        self.client = None
+        while fail_count < MAX_ATTEMPTS and self.client == None:
+            try:
+                self.client = fbchat.Client(user, passw)
+            except:
+                self.client = None
+                fail_count = fail_count + 1
+        if self.client == None:
+            print 'OH NO!'
+        else:
+            print 'Logged in!'
     
     def on_chat(self, fbid, who, msg):
         if 'otherUserFbId' in fbid:
@@ -18,10 +31,10 @@ class Fbbot(object):
 
     def parseMessage(self, content):
         if 'ms' not in content: return
+        #print content
         for m in content['ms']:
             if m['type'] in ['delta'] and m['delta']['class'] in ['NewMessage']:
                 body = m['delta']['body']
-                print body
                 fbid = m['delta']['messageMetadata']['threadKey']
                 who  = m['delta']['messageMetadata']['actorFbId']
                 self.on_chat(fbid, who, body)
@@ -45,4 +58,4 @@ class Fbbot(object):
         self.client.send(self._chat_id, message, self._group)
 
     def sendImage(self, image_url, message = ''):
-        self.client.send(self._chat_id, message + image_url, self._group, None)
+        self.client.sendRemoteImage(self._chat_id, message, self._group, image_url)

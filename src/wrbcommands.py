@@ -21,10 +21,13 @@ def hate(SENDER, TEXT, CMD, send):
     Tells PERSON that I hate them.'''
     send.send('Hate...')
     shortened = TEXT.replace(CMD,'',1)
-    enemy = re.sub('[\W+]','',shortened.split()[0].title())
-    send.send('{}, I HATE you!'.format(enemy))
-    if random.randin(1,10) <= 1:
-        send.send('And, {}, I hate you too!'.format(SENDER))
+    try:
+        enemy = re.sub('[\W+]','',shortened.split()[0].title())
+        send.send('{}, I HATE you!'.format(enemy))
+        if random.randint(1,10) <= 1:
+            send.send('And, {}, I hate you too!'.format(SENDER))
+    except:
+        pass
 
 def flip(SENDER, TEXT, CMD, send):
     '''Usage:   !flip

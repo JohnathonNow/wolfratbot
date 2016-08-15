@@ -3,7 +3,7 @@ wolfratboT
 A simple, modular chatbot.  
 ---------
 
-Current supports both Facebook and GroupMe chatbots.
+Currently supports both Facebook and GroupMe chatbots.
 
 Main loads in modules recursively from a given directory.
 These modules can modify the command handler's command 
@@ -25,7 +25,7 @@ Dependencies:
 ---------
   - pyyaml  
   - requests  
-  - fbchat (at the moment I recommend thekindlyone's fork)
+  - fbchat (at the moment I recommend my fork)
   - lxml  
 
 Setup:
@@ -33,11 +33,25 @@ Setup:
   1. Install all dependencies  
   2. Create a config file:  
      - Copy the example from the conf directory  
-     - Populate for your use, saving as a .dtxt file  
+     - Populate for your use, saving as a .dtxt file (see below)  
      - Run `make PATHTOFILE.etxt"  
      - Enter encryption key  
   3. Modify main.py to have the proper paths to your modules directory
 and your configuration file.
+
+Configuration:
+---------
+For facebook, you need an account for the bot. You should friend your main account,
+and add the bot to a group chat.  Save the username and password for the bot in the
+corresponding places of the config file.  
+
+For groupme, [set up the bot](https://dev.groupme.com/bots), your callback URL is
+your host / IP followed by your chosen port and a path for the bot. For example,
+my bot is named `WolfratBot`, my host is `johnbot.me`, I listen on port `9999`, and
+the path for WolfratBot is `/wrb`, so my callback URL is `http://www.johnbot.me:9999/wrb`.  
+Then, in the config file, fill out the groupme port number (`9999` in my example),
+the botid (from the dev.groupme website), the path (`/wrb` in my example), and
+the bot name (`WolfratBot` in my example).
 
 Running:
 ---------
@@ -46,6 +60,5 @@ Running:
 
 TODO:
 ---------
-  - Finish integrating into one server program
   - Add support for more messaging services  
   - Work on some NLP features  
