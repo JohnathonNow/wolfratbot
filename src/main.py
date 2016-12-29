@@ -52,11 +52,11 @@ for dirpath,dirs,files in os.walk(MODS):
             modname = filename[:-3]
             modpath = os.path.join(dirpath,filename)
             try:
-                print "Loading {}".format(modname)
+                print("Loading {}".format(modname))
                 m = imp.load_source(modname,modpath)
                 wrbcommands.addModule(m)
             except Exception as E:
-                print E
+                print(E)
                 pass
                 
 fb_thread = None
@@ -72,4 +72,4 @@ try:
     while True:
         time.sleep(10)
 except KeyboardInterrupt:
-    print "Goodbye!"
+    print("Goodbye!")

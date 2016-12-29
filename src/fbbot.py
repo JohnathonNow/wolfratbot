@@ -14,9 +14,9 @@ class Fbbot(object):
                 self.client = None
                 fail_count = fail_count + 1
         if self.client == None:
-            print 'OH NO!'
+            print('OH NO!')
         else:
-            print 'Logged in!'
+            print('Logged in!')
     
     def on_chat(self, fbid, who, msg):
         if 'otherUserFbId' in fbid:
@@ -26,12 +26,16 @@ class Fbbot(object):
             self._chat_id = fbid['threadFbId']
             self._group = 'group'
 
+        try:
+            who_name = self.client.getUserInfo(who)['firstName']
+        except:
+            who_name = who
+
         if str(who) != str(self.client.uid):
-            wrbcommands.handle(str(who), msg, self)
+            wrbcommands.handle(str(who_name), msg, self)
 
     def parseMessage(self, content):
         if 'ms' not in content: return
-        #print content
         for m in content['ms']:
             if m['type'] in ['delta'] and m['delta']['class'] in ['NewMessage']:
                 body = m['delta']['body']
@@ -46,7 +50,7 @@ class Fbbot(object):
             try:
                 self.client.ping(sticky)
                 content = self.client._pullMessage(sticky, pool)
-                #print content
+                #print(content)
                 if content:
                     self.parseMessage(content)
             except (KeyboardInterrupt, SystemExit):

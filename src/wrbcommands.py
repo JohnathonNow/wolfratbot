@@ -1,4 +1,6 @@
-import random, re, sys
+import random
+import re
+import sys
 
 # This is the module responsible for handling executed commands
 

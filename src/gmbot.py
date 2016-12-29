@@ -51,7 +51,7 @@ def listen(port=9999):
             sock = None
             failures = failures + 1
     if sock != None:
-        print "GMbot Connected!"
+        print("GMbot Connected!")
         try:
             sock.listen(0) 
             while True:
@@ -61,7 +61,7 @@ def listen(port=9999):
             sock.close()
             raise
     else:
-        print "GMbot could not listen!"
+        print("GMbot could not listen!")
 
 def handle(client):
     stream = client.makefile('w+')
