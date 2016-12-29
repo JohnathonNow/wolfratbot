@@ -42,7 +42,7 @@ def adlib(SENDER, TEXT, CMD, send):
             while rep in message:
                 message = message.replace(rep,randLine(toRep[rep]),1)
 
-        send.send(sentenceCase(message))
+        send.send(sentenceCase(message.strip()))
 
 COMMANDS = {'!ad': adlib}
 HANDLERS = {}
