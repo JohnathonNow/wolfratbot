@@ -1,10 +1,16 @@
 import random
 import os
+import re
 
 DIR = '/home/john/wolfratbot/src/modules/adlib/'
 ADJES = DIR + 'adjectivelist.txt'
 NOUNS = DIR + 'nounlist.txt'
 VERBS = DIR + 'verblist.txt'
+
+def sentenceCase(text):
+    return re.sub("(^|[.!?]\s*)(\S)",
+                  lambda m: m.group(1) + m.group(2).upper(),
+                  text)
 
 def randLine(fname):
     fsize = os.path.getsize(fname)
@@ -36,7 +42,7 @@ def adlib(SENDER, TEXT, CMD, send):
             while rep in message:
                 message = message.replace(rep,randLine(toRep[rep]),1)
 
-        send.send(message)
+        send.send(sentenceCase(message))
 
 COMMANDS = {'!ad': adlib}
 HANDLERS = {}
