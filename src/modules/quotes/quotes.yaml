@@ -113,6 +113,12 @@
        - "ok"
     quote: ""
     image: "http://i.imgur.com/ddpBJxL.jpg"
+-  
+    triggers:
+       - "*shrug*"
+    quote: ""
+    chance: 100
+    image: "http://johnwesthoff.com/img/asriel_shrug.gif"
 #-  
 #    triggers:
 #       - "the"
