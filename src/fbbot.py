@@ -1,23 +1,34 @@
 import fbchat
+import signal
 import wrbcommands
 
 MAX_ATTEMPTS = 3
+RESTICKY_DELAY = 60*60;
+class Timeout(Exception):
+    def __init__(self, message, errors):
+        super(Timeout, self).__init__(message)
+        self.errors = errors
 
 class Fbbot(object):
     def __init__(self, user, passw):
-        fail_count = 0
-        self.client = None
-        while fail_count < MAX_ATTEMPTS and self.client == None:
-            try:
-                self.client = fbchat.Client(user, passw)
-            except:
-                self.client = None
-                fail_count = fail_count + 1
+        self.user = user
+        self.passw = passw
+        self.login();
         if self.client == None:
             print('OH NO!')
         else:
             print('Logged in!')
     
+    def login(self):
+        fail_count = 0
+        self.client = None
+        while fail_count < MAX_ATTEMPTS and self.client == None:
+            try:
+                self.client = fbchat.Client(self.user, self.passw)
+            except:
+                self.client = None
+                fail_count = fail_count + 1
+
     def on_chat(self, fbid, who, msg):
         if 'otherUserFbId' in fbid:
             self._chat_id = fbid['otherUserFbId']
@@ -48,11 +59,15 @@ class Fbbot(object):
 
         while True:
             try:
+                signal.alarm(RESTICKY_DELAY);
                 self.client.ping(sticky)
                 content = self.client._pullMessage(sticky, pool)
-                #print(content)
+                print(content)
                 if content:
                     self.parseMessage(content)
+            except Timeout:
+                self.login()
+                sticky, pool = self.client._getSticky()
             except (KeyboardInterrupt, SystemExit):
                 raise
             except:
