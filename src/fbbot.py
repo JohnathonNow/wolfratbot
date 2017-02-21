@@ -52,6 +52,9 @@ class Fbbot(object):
                 body = m['delta']['body']
                 fbid = m['delta']['messageMetadata']['threadKey']
                 who  = m['delta']['messageMetadata']['actorFbId']
+                mid  = m['delta']['messageMetadata']['messageId']
+                self.client.markAsDelivered(fbid, mid)
+                self.client.markAsRead(fbid)
                 self.on_chat(fbid, who, body)
 
     def listen(self):
@@ -62,7 +65,7 @@ class Fbbot(object):
                 signal.alarm(RESTICKY_DELAY);
                 self.client.ping(sticky)
                 content = self.client._pullMessage(sticky, pool)
-                print(content)
+                #print(content)
                 if content:
                     self.parseMessage(content)
             except Timeout:
