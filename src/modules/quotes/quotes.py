@@ -1,7 +1,8 @@
 import yaml
 import random
+import os
 
-QUOTES = '/home/john/wolfratbot/src/modules/quotes/quotes.yaml'
+QUOTES = os.path.dirname(__file__) + '/quotes.yaml'
 
 def handler(SENDER, TEXT, send):
     quotes = yaml.load(file(QUOTES,'r'))

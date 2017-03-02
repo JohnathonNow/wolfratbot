@@ -1,83 +1,77 @@
 import fbchat
 import signal
 import wrbcommands
+import socket
+import sys
 
-MAX_ATTEMPTS = 3
-RESTICKY_DELAY = 60*60;
-class Timeout(Exception):
-    def __init__(self, message, errors):
-        super(Timeout, self).__init__(message)
-        self.errors = errors
-
-class Fbbot(object):
-    def __init__(self, user, passw):
+class IRCbot(object):
+    def __init__(self, user, passw, server, channel, channels = False):
+        self.irc = IRC()
         self.user = user
+        self.channels = channels
         self.passw = passw
-        self.login();
-        if self.client == None:
-            print('OH NO!')
-        else:
-            print('Logged in!')
-    
-    def login(self):
-        fail_count = 0
-        self.client = None
-        while fail_count < MAX_ATTEMPTS and self.client == None:
-            try:
-                self.client = fbchat.Client(self.user, self.passw)
-            except:
-                self.client = None
-                fail_count = fail_count + 1
+        self.channel = None
+        self.irc.connect(server, channel, user, passw)
 
-    def on_chat(self, fbid, who, msg):
-        if 'otherUserFbId' in fbid:
-            self._chat_id = fbid['otherUserFbId']
-            self._group = 'user'
-        else:
-            self._chat_id = fbid['threadFbId']
-            self._group = 'group'
-
-        try:
-            who_name = self.client.getUserInfo(who)['firstName']
-        except:
-            who_name = who
-
-        if str(who) != str(self.client.uid):
-            wrbcommands.handle(str(who_name), msg, self)
-
-    def parseMessage(self, content):
-        if 'ms' not in content: return
-        for m in content['ms']:
-            if m['type'] in ['delta'] and m['delta']['class'] in ['NewMessage']:
-                body = m['delta']['body']
-                fbid = m['delta']['messageMetadata']['threadKey']
-                who  = m['delta']['messageMetadata']['actorFbId']
-                mid  = m['delta']['messageMetadata']['messageId']
-                self.client.markAsDelivered(fbid, mid)
-                self.client.markAsRead(fbid)
-                self.on_chat(fbid, who, body)
+    def on_chat(self, who, msg):
+        if who != self.user:
+            wrbcommands.handle(str(who), msg, self)
 
     def listen(self):
-        sticky, pool = self.client._getSticky()
-
         while True:
-            try:
-                signal.alarm(RESTICKY_DELAY);
-                self.client.ping(sticky)
-                content = self.client._pullMessage(sticky, pool)
-                #print(content)
-                if content:
-                    self.parseMessage(content)
-            except Timeout:
-                self.login()
-                sticky, pool = self.client._getSticky()
-            except (KeyboardInterrupt, SystemExit):
-                raise
-            except:
-                pass
+             buff = self.irc.recieve()
+             if len(buff) > 0 and buff[0] == ':' and 'PRIVMSG' in buff:
+                 #it is a message
+                 who = buff[1:].split('!')[0].strip()
+                 self.channel = buff.split('PRIVMSG', 1)[1].split(':', 1)[0].strip()
+                 message = buff.split('PRIVMSG', 1)[1].split(':', 1)[1].strip()
+                 if not '#' in self.channel:
+                     self.channel = who
+                     self.on_chat(who, message)
+                 elif self.channels:
+                     self.on_chat(who, message)
+
 
     def send(self, message):
-        self.client.send(self._chat_id, message, self._group)
+        self.irc.send(self.channel, message)
 
     def sendImage(self, image_url, message = ''):
-        self.client.sendRemoteImage(self._chat_id, message, self._group, image_url)
+        self.send(message + image_url)
+ 
+class IRC:
+    irc = socket.socket()
+  
+    def __init__(self):  
+        self.irc = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+ 
+    def quit(self, channel, debug=False):
+        if debug:
+            print "quitting " + channel + "\n"
+        self.irc.send("QUIT " + " :kbye...\r\n")
+
+    def send(self, channel, msg, debug=False):
+        if debug:
+            print "sending \"" + msg + "\" to " + channel + "\n"
+        self.irc.send("PRIVMSG " + channel + " :" + msg + "\r\n")
+ 
+    def connect(self, server, channel, nick, password, debug=False):
+	if debug:
+            print "connecting to " + server
+        # TODO: error check all this
+        self.irc.connect((server, 6667))
+        self.irc.send("PASS " + password + "-no_mpdm_greet\r\n") 
+        self.irc.send("NICK " + nick + "\r\n")
+        self.irc.send("USER " + nick + " " + server + nick + " : " + nick + "\r\n") 
+        self.irc.send("JOIN " + channel + "\r\n")
+ 
+    def pong(self, buff, debug=False):
+        if buff.find('PING') != -1:
+            if debug:
+                print "recieved " + buff + "\n"
+                print "sending " + buff.split()[1] + "\n"
+            self.irc.send('PONG ' + buff.split()[1] + '\r\n') 
+
+    def recieve(self, debug=False):
+        buff = self.irc.recv(2040)
+        self.pong(buff, debug)
+        return buff

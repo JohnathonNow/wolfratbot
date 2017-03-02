@@ -8,3 +8,10 @@ groupme:
         -  botid:  "GROUPME API KEY"
            path:   "CALLBACK PATH"
            name:   "BOT NAME"
+irc:
+    server:    "IRC HOST ADDRESS"
+    username:  "USERNAME"
+    password:  "PASSWORD"
+    channel:   "STARTING CHANNEL"
+    channels:  yes/no depending on whether or not you want it to respond to
+               channels or just direct messages

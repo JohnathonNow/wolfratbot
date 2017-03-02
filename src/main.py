@@ -4,6 +4,7 @@ from Crypto import Random
 from hashlib import md5
 import yaml
 import getpass
+import ircbot
 import os
 import fbbot
 import gmbot
@@ -65,6 +66,13 @@ try:
     if 'facebook' in conf:
         fbot = fbbot.Fbbot(conf['facebook']['username'], conf['facebook']['password'])
         fb_thread = thread.start_new_thread(fbbot.Fbbot.listen, (fbot,))
+
+    if 'irc' in conf:
+        i = ircbot.IRCbot(conf['irc']['username'],conf['irc']['password'],
+                 conf['irc']['server'], conf['irc']['channel'],
+                 conf['irc']['channels'])
+        irc_thread = thread.start_new_thread(i.listen, ())
+
     if 'groupme' in conf:
         gm_thread = thread.start_new_thread(gmbot.listen, (conf['groupme']['port'],))
         for bot in conf['groupme']['bots']:
