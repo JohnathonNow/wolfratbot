@@ -69,6 +69,7 @@ class Fbbot(object):
                 if content:
                     self.parseMessage(content)
             except Timeout:
+                print('RELOGGING IN!')
                 self.login()
                 sticky, pool = self.client._getSticky()
             except (KeyboardInterrupt, SystemExit):
