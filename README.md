@@ -1,13 +1,17 @@
-wolfratboT
+wolfratbot
 =========
-A simple, modular chatbot.  
+A simple, modular, multiplatform chatbot.
 ---------
 
 Currently supports both Facebook and GroupMe chatbots.
 
+The idea behind the project is to configure a single chatbot that runs on multiple platforms,
+with a simple interface for adding new platforms.  
+
 Main loads in modules recursively from a given directory.
-These modules can modify the command handler's command 
-dictionary to add functionality to the bot.  
+These modules can add commands to the bot, which are run whenever a message
+contains a command, as well as add handlers to the bot which can read and handle
+raw messages.  
 
 Some of the implemented commands are:  
   - !flip     - flip a coin and send the results
@@ -34,7 +38,7 @@ Setup:
   2. Create a config file:  
      - Copy the example from the conf directory  
      - Populate for your use, saving as a .dtxt file (see below)  
-     - Run `make PATHTOFILE.etxt"  
+     - Run `make PATHTOFILE.etxt` or `make encrypt` if you want to use the default configuration path of `conf/conf.etxt`.
      - Enter encryption key  
   3. Modify main.py to have the proper paths to your modules directory
 and your configuration file.
