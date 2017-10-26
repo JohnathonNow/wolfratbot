@@ -32,6 +32,15 @@ def flip(SENDER, TEXT, CMD, send):
     Flips a coin and sends the result to the chat.'''
     send.send(random.choice(['Heads!','Tails!']))	
 
+def roll(SENDER, TEXT, CMD, send):
+    '''Usage:   !roll X,Y
+
+    Simulates the rolling of XdY'''
+    res = ""
+    x = TEXT.split(",")[0]
+    y = TEXT.split(",")[1]
+    for i in range(int(y)):
+        send.send(str(random.randint(1, int(x))))	
 
 def listings(SENDER, TEXT, CMD, send):
     '''Usage:   !list
@@ -71,6 +80,7 @@ def info(SENDER, TEXT, CMD, send):
 COMMANDS = {
 '!help': ihelp,
 '!hate': hate,
+'!roll': roll,
 '!repeat': repeat,
 '!flip': flip,
 '!list': listings,
