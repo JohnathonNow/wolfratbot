@@ -5,7 +5,7 @@ class send(object):
         def __init__(self, bot_id = 'e18f0a0d058420de66f2e2a387'):
             self.bot_id = bot_id
 
-        # Send a test message as a GroupMe bot
+        # Send a text message as a GroupMe bot
         def send(self,message):
             url = 'https://api.groupme.com/v3/bots/post'
             text = message;

@@ -1,15 +1,21 @@
+#!/home/john/bin/anaconda2/bin/python -B
 from Crypto.Cipher import AES
 from Crypto import Random
 from hashlib import md5
 import yaml
 import getpass
+import ircbot
 import os
 import fbbot
+import gmbot
+import time
 import imp
 import wrbcommands
+import thread
 
-CONFIG = "/home/john/wolfratbot/conf/conf.etxt"
-MODS = "/var/www/modules"
+CONFIG = "../conf/conf.etxt"
+MODS = "modules"
+
 PASSWORD = ""
 
 # pretty shamefully taken from StackOverflow
@@ -41,18 +47,37 @@ PASSWORD = getpass.getpass("Enter key for {}:".format(os.path.basename(CONFIG)))
 with open(CONFIG) as in_file:
     conf = yaml.load(decrypt(in_file,PASSWORD))
 
-fbot = fbbot.Fbbot(conf['facebook']['username'], conf['facebook']['password'])
-print 'Logged in!'
 for dirpath,dirs,files in os.walk(MODS):
     for filename in files:
         if '.py' in filename[-3:]:
             modname = filename[:-3]
             modpath = os.path.join(dirpath,filename)
             try:
-                print "Loading {}".format(modname)
+                print("Loading {}".format(modname))
                 m = imp.load_source(modname,modpath)
                 wrbcommands.addModule(m)
             except Exception as E:
-                print E
+                print(E)
                 pass
-fbot.listen()
+                
+fb_thread = None
+gm_thread = None
+try:
+    if 'facebook' in conf:
+        fbot = fbbot.Fbbot(conf['facebook']['username'], conf['facebook']['password'])
+        fb_thread = thread.start_new_thread(fbbot.Fbbot.listen, (fbot,))
+
+    if 'irc' in conf:
+        i = ircbot.IRCbot(conf['irc']['username'],conf['irc']['password'],
+                 conf['irc']['server'], conf['irc']['channel'],
+                 conf['irc']['channels'])
+        irc_thread = thread.start_new_thread(i.listen, ())
+
+    if 'groupme' in conf:
+        gm_thread = thread.start_new_thread(gmbot.listen, (conf['groupme']['port'],))
+        for bot in conf['groupme']['bots']:
+            gmbot.addBot(bot['path'], gmbot.Gmbot(bot['botid'], bot['name']))
+    while True:
+        time.sleep(10)
+except KeyboardInterrupt:
+    print("Goodbye!")

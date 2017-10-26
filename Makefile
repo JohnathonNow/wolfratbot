@@ -6,6 +6,9 @@ GIT_ADD=src/* Makefile README.md conf/* .gitignore
 
 all:
 
+decrypt: ./conf/conf.dtxt
+encrypt: ./conf/conf.etxt
+
 # Decrypt an encrypted file
 %.dtxt: %.etxt
 	$(DECRYPT) -in $< -out $@
@@ -22,6 +25,9 @@ push:
 
 restart: 
 	sudo /etc/init.d/apache2 restart
+
+test:
+	python -B src/main.py
 
 clean:
 	find src -name *.pyc -exec rm '{}' \;

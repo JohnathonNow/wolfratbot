@@ -1,28 +1,68 @@
 wolfratbot
 =========
-A simple, modular chatbot.  
+A simple, modular, multiplatform chatbot.
 ---------
 
-At the moment, it is just a GroupMe bot, set up with apache and WSGI, but
-soon it will be much more.   
+Currently supports both Facebook and GroupMe chatbots.
 
-The WSGI script is the GroupMe bot's call back.  
-It loads the command handler and all python modules
-in a set module directory. These modules can modify
-the command handler's command dictionary to add
-functionality to the bot.  
+The idea behind the project is to configure a single chatbot that runs on multiple platforms,
+with a simple interface for adding new platforms.  
+
+Main loads in modules recursively from a given directory.
+These modules can add commands to the bot, which are run whenever a message
+contains a command, as well as add handlers to the bot which can read and handle
+raw messages.  
 
 Some of the implemented commands are:  
   - !flip     - flip a coin and send the results
   - !repeat   - repeat the rest of the message
   - !img      - send a random valid image from imgur
-  - !yt       - sends the first result for a YouTube search string
-  - !list     - lists all valid commands
-  - !help     - gives information on any valid command
+  - !yt       - send the first result for a YouTube search string
+  - !list     - list all valid commands
+  - !help     - give information on any valid command
+
+Configuration for the chatbot is stored in an encrypted config file.
+The reason for the encryption is to keep GroupMe API keys secret and
+Facebook passwords private.
+
+Dependencies:
+---------
+  - pyyaml  
+  - requests  
+  - fbchat (at the moment I recommend my fork)
+  - lxml  
+
+Setup:
+--------
+  1. Install all dependencies  
+  2. Create a config file:  
+     - Copy the example from the conf directory  
+     - Populate for your use, saving as a .dtxt file (see below)  
+     - Run `make PATHTOFILE.etxt` or `make encrypt` if you want to use the default configuration path of `conf/conf.etxt`.
+     - Enter encryption key  
+  3. Modify main.py to have the proper paths to your modules directory
+and your configuration file.
+
+Configuration:
+---------
+For facebook, you need an account for the bot. You should friend your main account,
+and add the bot to a group chat.  Save the username and password for the bot in the
+corresponding places of the config file.  
+
+For groupme, [set up the bot](https://dev.groupme.com/bots), your callback URL is
+your host / IP followed by your chosen port and a path for the bot. For example,
+my bot is named `WolfratBot`, my host is `johnbot.me`, I listen on port `9999`, and
+the path for WolfratBot is `/wrb`, so my callback URL is `http://www.johnbot.me:9999/wrb`.  
+Then, in the config file, fill out the groupme port number (`9999` in my example),
+the botid (from the dev.groupme website), the path (`/wrb` in my example), and
+the bot name (`WolfratBot` in my example).
+
+Running:
+---------
+  1. Run main.py  
+  2. Enter encryption key  
 
 TODO:
 ---------
-  - Restructure modules such that they have their own attributes which are loaded
-into the manager, rather than having them actively adding to the manager  
-  - Convert to a single running server, which can then service multiple platforms, including
-more than one GroupMe chat, a Facebook Messenger chat, etc.
+  - Add support for more messaging services  
+  - Work on some NLP features  
