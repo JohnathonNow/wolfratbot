@@ -37,9 +37,10 @@ def roll(SENDER, TEXT, CMD, send):
 
     Simulates the rolling of XdY'''
     res = ""
+    x = TEXT.split(",")[0]
+    y = TEXT.split(",")[1]
     for i in range(int(y)):
-        res += random.randint
-    send.send(random.choice())	
+        send.send(str(random.randint(1, int(x))))	
 
 def listings(SENDER, TEXT, CMD, send):
     '''Usage:   !list
@@ -79,6 +80,7 @@ def info(SENDER, TEXT, CMD, send):
 COMMANDS = {
 '!help': ihelp,
 '!hate': hate,
+'!roll': roll,
 '!repeat': repeat,
 '!flip': flip,
 '!list': listings,
