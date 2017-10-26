@@ -23,7 +23,7 @@ def hate(SENDER, TEXT, CMD, send):
     shortened = TEXT.replace(CMD,'',1)
     enemy = re.sub('[\W+]','',shortened.split()[0].title())
     send.send('{}, I HATE you!'.format(enemy))
-    if random.randin(1,10) <= 1:
+    if random.randint(1,10) <= 1:
         send.send('And, {}, I hate you too!'.format(SENDER))
 
 def flip(SENDER, TEXT, CMD, send):
@@ -32,6 +32,14 @@ def flip(SENDER, TEXT, CMD, send):
     Flips a coin and sends the result to the chat.'''
     send.send(random.choice(['Heads!','Tails!']))	
 
+def roll(SENDER, TEXT, CMD, send):
+    '''Usage:   !roll X,Y
+
+    Simulates the rolling of XdY'''
+    res = ""
+    for i in range(int(y)):
+        res += random.randint
+    send.send(random.choice())	
 
 def listings(SENDER, TEXT, CMD, send):
     '''Usage:   !list
