@@ -20,6 +20,7 @@ Some of the implemented commands are:
   - !yt       - send the first result for a YouTube search string
   - !list     - list all valid commands
   - !help     - give information on any valid command
+  - !roll     - roll an n-sided die a given number of times
 
 Configuration for the chatbot is stored in an encrypted config file.
 The reason for the encryption is to keep GroupMe API keys secret and
