@@ -3,7 +3,7 @@ wolfratbot
 A simple, modular, multiplatform chatbot.
 ---------
 
-Currently supports both Facebook and GroupMe chatbots.
+Currently supports both Facebook, GroupMe, and IRC chatbots.
 
 The idea behind the project is to configure a single chatbot that runs on multiple platforms,
 with a simple interface for adding new platforms.  
@@ -32,17 +32,22 @@ Dependencies:
   - requests  
   - fbchat (at the moment I recommend my fork)
   - lxml  
+... and a few more listed in `requirements.txt`. To install all
+dependencies, run `pip install -r requirements.txt`.   
 
 Setup:
 --------
   1. Install all dependencies  
   2. Create a config file:  
      - Copy the example from the conf directory  
-     - Populate for your use, saving as a .dtxt file (see below)  
+     - Populate for your use, saving as `conf.dtxt` under the `conf/`
+		 directory (see below). If you only want to use one platform, just
+		 completely omit the configurations for the other platforms.  
      - Run `make PATHTOFILE.etxt` or `make encrypt` if you want to use the default configuration path of `conf/conf.etxt`.
-     - Enter encryption key  
+     - Enter encryption key  (this will create `conf.etxt` in `conf/`)  
   3. Modify main.py to have the proper paths to your modules directory
-and your configuration file.
+and your configuration file. Do not edit `PASSWORD`, this will be populated
+automatically.  
 
 Configuration:
 ---------
