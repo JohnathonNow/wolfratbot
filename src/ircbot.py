@@ -33,7 +33,8 @@ class IRCbot(object):
 
 
     def send(self, message):
-        self.irc.send(self.channel, message)
+	for m in message.split('\n'):
+        	self.irc.send(self.channel, m)
 
     def sendImage(self, image_url, message = ''):
         self.send(message + image_url)
