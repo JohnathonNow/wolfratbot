@@ -4,4 +4,6 @@
 *.dtxt
 # Virtual environment
 venv/
+# Encrypted config files
+*.etxt
 
