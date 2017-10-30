@@ -41,11 +41,15 @@ def roll(SENDER, TEXT, CMD, send):
     '''Usage:   !roll X,Y
 
     Simulates the rolling of XdY'''
-    res = ""
-    x = TEXT.split(",")[0]
-    y = TEXT.split(",")[1]
-    for i in range(int(y)):
-        send.send(str(random.randint(1, int(x))))	
+
+    text = TEXT.split(" ")
+    options = text[text.index(CMD) + 1]
+    try:
+        x, y = options.split(",")
+        for _ in range(int(x)):
+            send.send("{}".format(random.randint(1, int(y))))
+    except ValueError:
+        send.send("!roll requires X and Y to be integers. For help, run !help roll")
 
 def listings(SENDER, TEXT, CMD, send):
     '''Usage:   !list
