@@ -1,7 +1,7 @@
 import random
 import re
 import sys
-
+import wumpy
 # This is the module responsible for handling executed commands
 
 # Commands are stored in a dict mapping the command string to a command function
@@ -85,6 +85,49 @@ def ihelp(SENDER, TEXT, CMD, send):
 def info(SENDER, TEXT, CMD, send):
     send.send('\n'.join(sys.path))
 
+wumpus = wumpy.WumpController()
+def wump(SENDER, TEXT, CMD, send):
+    '''Usage:   !wump [n | m [cave #] | s [list of cave numbers | a]
+
+	To start a new game, send !wump #
+	To move to a different cave, send !wump m #
+		eg, !wump m 10
+	To shoot an arrow, send !wump s # # #
+		you can shoot an arrow at a range of one to five rooms
+		eg, !wump s 10
+		or
+		!wump s 10 12 17
+	To see the number of arrows you have remaining, send !wump a
+
+    Controls and plays the game Hunt the Wumpus'''
+    shortened = TEXT.replace(CMD,'',1)
+    text = TEXT.split(" ")
+    try:
+        if len(text) == 0:
+            send.send("Must give an argument for wump.  For help, run !help wump")
+        if text[0] == 'n':
+            send.send(wumpus.Reset())
+        elif text[0] == 'm':
+            try:
+                send.send(wumpus.MovePlayer(int(text[1])))
+            except IndexError:
+                send.send("Incorrect number of arguments for m.  For help, run !help wump")
+        elif text[0] == 's':
+            try:
+                if len(text[1:]) > 5:
+                    send.send("Incorrect number of arguments for s.  For help, run !help wump")
+                else:
+                    send.send(wumpus.ShootArrow(int(text[1:])))
+            except IndexError:
+                send.send("Incorrect number of arguments for s.  For help, run !help wump")
+            pass
+        elif text[0] == 'a':
+            send.send(wumpus.GetArrowCount)
+        else:
+            send.send("Not a valid argument for wump.  For help, run !help wump")
+    except ValueError:
+        send.send("!wump requires room numbers to be integers. For help, run !help wump")
+
 # Then, map the functions to command strings
 COMMANDS = {
 '!help': ihelp,
@@ -93,7 +136,8 @@ COMMANDS = {
 '!repeat': repeat,
 '!flip': flip,
 '!list': listings,
-'!v': info
+'!v': info,
+'!wump': wump
 }
 
 # A set for storying functions that handle 
