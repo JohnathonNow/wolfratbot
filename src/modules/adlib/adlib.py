@@ -46,3 +46,4 @@ def adlib(SENDER, TEXT, CMD, send):
 
 COMMANDS = {'!ad': adlib}
 HANDLERS = {}
+# vim: sts=4 sw=4 ts=4 expandtab ft=python

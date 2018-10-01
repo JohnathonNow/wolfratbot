@@ -76,3 +76,4 @@ class IRC:
         buff = self.irc.recv(2040)
         self.pong(buff, debug)
         return buff
+# vim: sts=4 sw=4 ts=4 expandtab ft=python

@@ -162,3 +162,4 @@ def handle(SENDER, TEXT, send):
     for handler in HANDLERS:
         HANDLERS[handler](SENDER,TEXT,send)
 
+# vim: sts=4 sw=4 ts=4 expandtab ft=python

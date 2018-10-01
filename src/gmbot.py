@@ -97,3 +97,4 @@ def handle(client):
 if __name__ == '__main__':
     addBot()
     listen()
+# vim: sts=4 sw=4 ts=4 expandtab ft=python
