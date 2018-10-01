@@ -23,3 +23,4 @@ class send(object):
                     'url': image_url
             }]}
             requests.post(url, data=json.dumps(payload))
+# vim: sts=4 sw=4 ts=4 expandtab ft=python

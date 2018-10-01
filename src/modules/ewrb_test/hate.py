@@ -6,3 +6,4 @@ def hating(SENDER,MESSAGE,CMD,send):
 COMMANDS = {'hate': hating,
             'love': hating}
 HANDLERS = {}
+# vim: sts=4 sw=4 ts=4 expandtab ft=python

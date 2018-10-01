@@ -41,3 +41,4 @@ def xkcd(SENDER, TEXT, CMD, send):
 COMMANDS = {'!smbc': smbc,
             '!xkcd': xkcd}
 HANDLERS = {}
+# vim: sts=4 sw=4 ts=4 expandtab ft=python
