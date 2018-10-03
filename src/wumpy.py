@@ -261,3 +261,4 @@ if __name__ == "__main__":
 			print(cont.ShootArrow([int(i) for i in y[1:]]))
 		elif y[0] == 'a':
 			print(cont.GetArrowCount())
+# vim: sts=4 sw=4 ts=4 expandtab ft=python

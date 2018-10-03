@@ -81,3 +81,4 @@ try:
         time.sleep(10)
 except KeyboardInterrupt:
     print("Goodbye!")
+# vim: sts=4 sw=4 ts=4 expandtab ft=python

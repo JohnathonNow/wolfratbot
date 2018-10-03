@@ -31,3 +31,4 @@ def img(SENDER, TEXT, CMD, send):
 
 COMMANDS = {'!img': img}
 HANDLERS = {}
+# vim: sts=4 sw=4 ts=4 expandtab ft=python

@@ -29,3 +29,4 @@ def youtube(SENDER, TEXT, CMD, send):
 COMMANDS = {'!yt': youtube,
             '!g':  g_search}
 HANDLERS = {}
+# vim: sts=4 sw=4 ts=4 expandtab ft=python

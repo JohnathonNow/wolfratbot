@@ -82,3 +82,5 @@ class Fbbot(object):
 
     def sendImage(self, image_url, message = ''):
         self.client.sendRemoteImage(self._chat_id, message, self._group, image_url)
+
+# vim: sts=4 sw=4 ts=4 expandtab ft=python
