@@ -101,7 +101,7 @@ def wump(SENDER, TEXT, CMD, send):
 
     Controls and plays the game Hunt the Wumpus'''
     shortened = TEXT.replace(CMD,'',1)
-    text = TEXT.split(" ")
+    text = shortened.split(" ")
     try:
         if len(text) == 0:
             send.send("Must give an argument for wump.  For help, run !help wump")
