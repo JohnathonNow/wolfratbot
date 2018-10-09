@@ -117,7 +117,7 @@ def wump(SENDER, TEXT, CMD, send):
                 if len(text[1:]) > 5:
                     send.send("Incorrect number of arguments for s.  For help, run !help wump")
                 else:
-                    send.send(wumpus.ShootArrow(int(text[1:])))
+                    send.send(wumpus.ShootArrow(map(lambda x: int(x), text[1:])))
             except IndexError:
                 send.send("Incorrect number of arguments for s.  For help, run !help wump")
             pass
