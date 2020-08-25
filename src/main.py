@@ -1,7 +1,3 @@
-#!/home/john/bin/anaconda2/bin/python -B
-from Crypto.Cipher import AES
-from Crypto import Random
-from hashlib import md5
 import yaml
 import getpass
 import os
@@ -12,7 +8,7 @@ import dcbot
 import time
 import imp
 import wrbcommands
-import thread
+import _thread as thread
 
 CONFIG = "../conf/conf.txt"
 MODS = "modules"
@@ -35,7 +31,6 @@ for dirpath,dirs,files in os.walk(MODS):
             except Exception as E:
                 print(E)
                 pass
-                
 try:
     if 'facebook' in conf:
         fbot = fbbot.Fbbot(conf['facebook']['username'], conf['facebook']['password'])

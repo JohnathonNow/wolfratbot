@@ -23,7 +23,7 @@ class Dcbot(discord.Client):
 
     def send(self, message):
         print(message)
-        loop.create_task(self.send_message(self.channel, message))
+        loop.create_task(self.channel.send(message))
 
     def sendImage(self, image_url, message=''):
         self.send(message + image_url)
@@ -36,7 +36,7 @@ def addBot(token):
     BOTS[token].begin()
         
 if __name__ == '__main__':
-    TOKEN = 'NDk2ODc0NzcwMjM1OTE2MzE5.DpW-iw.qN6rd4G2NBsR-BMzLhivrYwR7S8'
+    TOKEN = 'NDk2ODg0OTgwNDkyNzk1OTE5.W7Q2Mw.3kQCztzlOdv9gO_efZO56ezsW04'
     addBot(TOKEN)
         
 # vim: sts=4 sw=4 ts=4 expandtab ft=python
