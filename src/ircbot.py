@@ -19,8 +19,8 @@ class IRCbot(object):
 
     def listen(self):
         while True:
-             buff = self.irc.recieve()
-             if len(buff) > 0 and buff[0] == ':' and 'PRIVMSG' in buff:
+            buff = self.irc.recieve()
+            if len(buff) > 0 and buff[0] == ':' and 'PRIVMSG' in buff:
                  #it is a message
                  who = buff[1:].split('!')[0].strip()
                  self.channel = buff.split('PRIVMSG', 1)[1].split(':', 1)[0].strip()
@@ -33,43 +33,34 @@ class IRCbot(object):
 
 
     def send(self, message):
-	for m in message.split('\n'):
-        	self.irc.send(self.channel, m)
+        for m in message.split('\n'):
+            self.irc.send(self.channel, m)
 
     def sendImage(self, image_url, message = ''):
         self.send(message + image_url)
- 
+
 class IRC:
     irc = socket.socket()
-  
+
     def __init__(self):  
         self.irc = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
- 
+
     def quit(self, channel, debug=False):
-        if debug:
-            print "quitting " + channel + "\n"
         self.irc.send("QUIT " + " :kbye...\r\n")
 
     def send(self, channel, msg, debug=False):
-        if debug:
-            print "sending \"" + msg + "\" to " + channel + "\n"
         self.irc.send("PRIVMSG " + channel + " :" + msg + "\r\n")
- 
+
     def connect(self, server, channel, nick, password, debug=False):
-	if debug:
-            print "connecting to " + server
         # TODO: error check all this
         self.irc.connect((server, 6667))
         self.irc.send("PASS " + password + "-no_mpdm_greet\r\n") 
         self.irc.send("NICK " + nick + "\r\n")
         self.irc.send("USER " + nick + " " + server + nick + " : " + nick + "\r\n") 
         self.irc.send("JOIN " + channel + "\r\n")
- 
+
     def pong(self, buff, debug=False):
         if buff.find('PING') != -1:
-            if debug:
-                print "recieved " + buff + "\n"
-                print "sending " + buff.split()[1] + "\n"
             self.irc.send('PONG ' + buff.split()[1] + '\r\n') 
 
     def recieve(self, debug=False):

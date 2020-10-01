@@ -5,7 +5,8 @@ import os
 QUOTES = os.path.dirname(__file__) + '/quotes.yaml'
 
 def handler(SENDER, TEXT, send):
-    quotes = yaml.load(file(QUOTES,'r'))
+    with open(QUOTES,'r') as f:
+        quotes = yaml.load(f)
     for quote in quotes:
         for trigger in quote['triggers']:
             if trigger.lower() in TEXT.lower():

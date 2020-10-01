@@ -1,6 +1,6 @@
 import requests
 import json
-import thread
+import _thread
 import socket
 import wrbcommands
 
@@ -56,7 +56,7 @@ def listen(port=9999):
             sock.listen(0) 
             while True:
                 client, address = sock.accept()
-                thread.start_new_thread(handle, (client, ))
+                _thread.start_new_thread(handle, (client, ))
         except KeyboardInterrupt:
             sock.close()
             raise

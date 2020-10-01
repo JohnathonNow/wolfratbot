@@ -101,7 +101,7 @@ def wump(SENDER, TEXT, CMD, send):
 
     Controls and plays the game Hunt the Wumpus'''
     shortened = TEXT.replace(CMD,'',1)
-    text = TEXT.split(" ")
+    text = shortened.split(" ")
     try:
         if len(text) == 0:
             send.send("Must give an argument for wump.  For help, run !help wump")
@@ -117,7 +117,7 @@ def wump(SENDER, TEXT, CMD, send):
                 if len(text[1:]) > 5:
                     send.send("Incorrect number of arguments for s.  For help, run !help wump")
                 else:
-                    send.send(wumpus.ShootArrow(int(text[1:])))
+                    send.send(wumpus.ShootArrow(map(lambda x: int(x), text[1:])))
             except IndexError:
                 send.send("Incorrect number of arguments for s.  For help, run !help wump")
             pass

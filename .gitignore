@@ -1,9 +1,5 @@
 # Compiled python files
 *.pyc
-# Decrypted text files
-*.dtxt
-# encrytped text files
-*.etxt
 # Virtual environment
 venv/
 
